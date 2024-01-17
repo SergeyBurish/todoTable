@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:todo_table/data/api/service/airtable_service.dart';
 
 import 'counter.dart'; // Import the Counter
 
@@ -9,21 +9,8 @@ final counter = Counter(); // Instantiate the store
 void testRequest() {
   print("testRequest");
 
-  const _BASE_URL = 'https://api.airtable.com/v0/appTZNzop6QNsjyGs/Table%20ZZZ';
-
-  Dio dio = Dio(
-    BaseOptions(baseUrl: _BASE_URL),
-  );
-
-  var token = "pat65DA0Jg6YfYcS0.ba2a281f0fa118edf0c6076e93697f96b2c638c781c806eda7b1525b9764af1b";
-
-  dio.get(  
-    '',
-    queryParameters: {},
-    options: Options(
-        headers: {"Authorization": "Bearer $token"},
-      )
-  ).then((value) => print(value));
+  AirtableService airtableService = AirtableService();
+  airtableService.getUser();
 }
 
 void main() => runApp(MyApp());
