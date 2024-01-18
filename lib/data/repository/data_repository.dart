@@ -1,0 +1,15 @@
+
+import 'package:todo_table/businessLogic/model/user.dart';
+import 'package:todo_table/businessLogic/repository/repository.dart';
+import 'package:todo_table/data/api/api_util.dart';
+
+class DataRepository extends Repository {
+  final ApiUtil _apiUtil;
+
+  DataRepository(this._apiUtil);
+
+  @override
+  Future<List<User>> getUser({required String name, required String password}) {
+    return _apiUtil.getUser(name: name, password: password);
+  }
+}

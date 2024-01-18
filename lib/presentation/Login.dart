@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:todo_table/data/api/api_util.dart';
-import 'package:todo_table/data/api/service/airtable_service.dart';
+import 'package:todo_table/businessLogic/state/app_state.dart';
+import 'package:todo_table/internal/dependencies/repository_module.dart';
 
-import 'package:todo_table/counter.dart'; // Import the Counter
-
-final counter = Counter(); // Instantiate the store
+final appState = AppState(); // Instantiate the store
 
 void testRequest() {
   print("testRequest");
 
-  ApiUtil util = ApiUtil(AirtableService());
-  util.getUser(name: 'user1', password: '123');
+  RepositoryModule.repository().getUser(name: 'user1', password: '123').then(
+    (users) => print(users.length));
 }
 
 class Login extends StatelessWidget {
@@ -33,7 +31,7 @@ class Login extends StatelessWidget {
             // Wrapping in the Observer will automatically re-render on changes to counter.value
             Observer(
               builder: (_) => Text(
-                    '${counter.value}',
+                    '${appState.valueAs}',
                     style: Theme.of(context).textTheme.headline4,
                   ),
             ),
@@ -46,7 +44,7 @@ class Login extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: counter.increment,
+        onPressed: appState.incrementAs,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
