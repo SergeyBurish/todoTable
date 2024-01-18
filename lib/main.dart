@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:todo_table/data/api/api_util.dart';
 import 'package:todo_table/data/api/service/airtable_service.dart';
 
 import 'counter.dart'; // Import the Counter
@@ -9,8 +10,8 @@ final counter = Counter(); // Instantiate the store
 void testRequest() {
   print("testRequest");
 
-  AirtableService airtableService = AirtableService();
-  airtableService.getUser();
+  ApiUtil util = ApiUtil(AirtableService());
+  util.getUser(name: 'user1', password: '123');
 }
 
 void main() => runApp(MyApp());

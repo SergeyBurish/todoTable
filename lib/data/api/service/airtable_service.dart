@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:todo_table/data/api/dto/user_dto.dart';
+import 'package:todo_table/data/api/request/get_user_request.dart';
 
 class AirtableService {
   static const _BASE_URL = 'https://api.airtable.com/v0/appal3ocGrE9dpt3I/Users';
@@ -8,13 +10,12 @@ class AirtableService {
     BaseOptions(baseUrl: _BASE_URL),
   );
 
-  void getUser() {
-    var params = {'filterByFormula': "AND({Name}='user1',{Password}='123')"};
-
-    _dio.get('',
-      queryParameters: params,
-      options: Options(
-        headers: {"Authorization": "Bearer $_token"},
-    )).then((value) => print(value));
+  Future<UsersDto> getUser(GetUserRequest request) async {
+    final response = await _dio.get(
+      '',
+      queryParameters: request.parameters(),
+      options: Options( headers: {"Authorization": "Bearer $_token"}, )
+    );
+    return UsersDto.fromApi(response.data);
   }
 }
