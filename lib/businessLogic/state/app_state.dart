@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:todo_table/businessLogic/repository/repository.dart';
 
 // Include generated file
 part 'app_state.g.dart';
@@ -8,11 +9,33 @@ class AppState = _AppState with _$AppState;
 
 // The store-class
 abstract class _AppState with Store {
+  _AppState(this._repository);
+
+  final Repository _repository;
+
   @observable
-  int valueAs = 0;
+  bool isLoading = false;
+
+  @observable
+  bool loggedIn = false;
+
+  @observable
+  bool logInFail = false;
+
+  @observable
+  String  userName = '';
 
   @action
-  void incrementAs() {
-    valueAs += 2;
+  Future<void> getUser() async {
+    isLoading = true;
+
+    final users = await _repository.getUser(name: 'user1', password: '123');
+    if (users.isNotEmpty) {
+      userName = users.first.name;
+    }
+    loggedIn = users.isNotEmpty;
+    logInFail = !loggedIn;
+
+    isLoading = false;
   }
 }

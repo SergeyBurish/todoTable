@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:todo_table/businessLogic/state/app_state.dart';
-import 'package:todo_table/internal/dependencies/repository_module.dart';
+import 'package:todo_table/internal/dependencies/state_module.dart';
 
-final appState = AppState(); // Instantiate the store
-
-void testRequest() {
-  print("testRequest");
-
-  RepositoryModule.repository().getUser(name: 'user1', password: '123').then(
-    (users) => print(users.length));
-}
+final appState = StateModule.appState();
 
 class Login extends StatelessWidget {
   const Login();
@@ -31,20 +23,15 @@ class Login extends StatelessWidget {
             // Wrapping in the Observer will automatically re-render on changes to counter.value
             Observer(
               builder: (_) => Text(
-                    '${appState.valueAs}',
+                    'name ${appState.userName} load ${appState.isLoading} login ${appState.loggedIn} fail ${appState.logInFail}',
                     style: Theme.of(context).textTheme.headline4,
                   ),
             ),
-            FloatingActionButton(
-              onPressed: () => testRequest(),
-              tooltip: 'Download',
-              child: Icon(Icons.arrow_downward),
-            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: appState.incrementAs,
+        onPressed: appState.getUser,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
