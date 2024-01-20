@@ -31,10 +31,10 @@ abstract class _AppState with Store {
   String userName = '';
 
   @action
-  Future<void> getUser() async {
+  Future<void> login(String name, String password) async {
     isLoading = true;
 
-    final users = await _repository.getUser(name: 'user1', password: '123');
+    final users = await _repository.getUser(name: name, password: password);
     if (users.isNotEmpty) {
       userName = users.first.name;
     }

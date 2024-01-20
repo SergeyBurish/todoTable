@@ -4,8 +4,23 @@ import 'package:todo_table/internal/dependencies/state_module.dart';
 
 final appState = StateModule.appState();
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Login extends StatefulWidget {
+  Login({super.key});
+  @override
+  _LoginState createState() => _LoginState();
+}
+class _LoginState extends State<Login>{
+
+  String _username = '';
+  String _password = '';
+
+  _changeName(String text){
+    setState(() => _username = text);
+  }
+
+  _changePwd(String text){
+    setState(() => _password = text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +41,25 @@ class Login extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   const Spacer(flex: 2,),
-                  const TextField(
-                    decoration: InputDecoration(
+                  TextField(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Username'
                     ),
+                    onChanged: _changeName,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: TextField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Password'
                       ),
+                      onChanged: _changePwd,
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: appState.getUser, 
+                    onPressed: () => appState.login(_username, _password), 
                     child: const Text('Log in'),
                   ),
                   const Spacer(),

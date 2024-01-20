@@ -73,12 +73,12 @@ mixin _$AppState on _AppState, Store {
     });
   }
 
-  late final _$getUserAsyncAction =
-      AsyncAction('_AppState.getUser', context: context);
+  late final _$loginAsyncAction =
+      AsyncAction('_AppState.login', context: context);
 
   @override
-  Future<void> getUser() {
-    return _$getUserAsyncAction.run(() => super.getUser());
+  Future<void> login(String name, String password) {
+    return _$loginAsyncAction.run(() => super.login(name, password));
   }
 
   @override

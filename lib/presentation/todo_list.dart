@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:todo_table/internal/dependencies/state_module.dart';
+
+final appState = StateModule.appState();
 
 class TodoList extends StatelessWidget {
   const TodoList({super.key});
@@ -14,8 +18,11 @@ class TodoList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Todo Lists',
+              'Username:',
             ),
+            Observer(builder: (_) {
+              return Text('${appState.userName}');
+            })
           ],
         ),
       ),
