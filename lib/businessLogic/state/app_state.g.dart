@@ -25,19 +25,19 @@ mixin _$AppState on _AppState, Store {
     });
   }
 
-  late final _$loggedInAtom =
-      Atom(name: '_AppState.loggedIn', context: context);
+  late final _$currentPageAtom =
+      Atom(name: '_AppState.currentPage', context: context);
 
   @override
-  bool get loggedIn {
-    _$loggedInAtom.reportRead();
-    return super.loggedIn;
+  AppPage get currentPage {
+    _$currentPageAtom.reportRead();
+    return super.currentPage;
   }
 
   @override
-  set loggedIn(bool value) {
-    _$loggedInAtom.reportWrite(value, super.loggedIn, () {
-      super.loggedIn = value;
+  set currentPage(AppPage value) {
+    _$currentPageAtom.reportWrite(value, super.currentPage, () {
+      super.currentPage = value;
     });
   }
 
@@ -85,7 +85,7 @@ mixin _$AppState on _AppState, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
-loggedIn: ${loggedIn},
+currentPage: ${currentPage},
 logInFail: ${logInFail},
 userName: ${userName}
     ''';

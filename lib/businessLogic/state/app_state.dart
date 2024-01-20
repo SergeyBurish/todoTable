@@ -4,6 +4,11 @@ import 'package:todo_table/businessLogic/repository/repository.dart';
 // Include generated file
 part 'app_state.g.dart';
 
+enum AppPage{
+    login,
+    todoList,
+}
+
 // This is the class used by rest of your codebase
 class AppState = _AppState with _$AppState;
 
@@ -16,14 +21,14 @@ abstract class _AppState with Store {
   @observable
   bool isLoading = false;
 
-  @observable
-  bool loggedIn = false;
+    @observable
+  AppPage currentPage = AppPage.login;
 
   @observable
   bool logInFail = false;
 
   @observable
-  String  userName = '';
+  String userName = '';
 
   @action
   Future<void> getUser() async {
@@ -33,8 +38,8 @@ abstract class _AppState with Store {
     if (users.isNotEmpty) {
       userName = users.first.name;
     }
-    loggedIn = users.isNotEmpty;
-    logInFail = !loggedIn;
+    currentPage = users.isEmpty ? AppPage.login : AppPage.todoList;
+    logInFail = users.isEmpty;
 
     isLoading = false;
   }

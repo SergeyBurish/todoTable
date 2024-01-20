@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:todo_table/businessLogic/state/app_state.dart';
+import 'package:todo_table/internal/dependencies/state_module.dart';
 import 'package:todo_table/presentation/login.dart';
+import 'package:todo_table/presentation/todo_list.dart';
+
+final appState = StateModule.appState();
 
 class Application extends StatelessWidget {
   const Application({super.key});
@@ -12,7 +18,12 @@ class Application extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Login(),
+      home: Observer(
+        builder: (_) => switch (appState.currentPage) {
+          AppPage.login => Login(),
+          AppPage.todoList => TodoList(),
+        },
+      ),
     );
   }
 }
