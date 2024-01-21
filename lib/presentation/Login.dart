@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
+import 'package:todo_table/l10n/l10n.dart';
 
 final appState = StateModule.appState();
 
@@ -68,7 +68,7 @@ class _LoginState extends State<Login>{
                     padding: EdgeInsets.only(bottom: 10),
                     child: Text(
                       style:TextStyle(fontSize: 20),
-                      AppLocalizations.of(context).noAccountQuestion,
+                      L10n.of(context).noAccountQuestion,
                     ),
                   ),
                   ElevatedButton(
