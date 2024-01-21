@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
 
 final appState = StateModule.appState();
 
 class Login extends StatefulWidget {
-  Login({super.key});
+  const Login({super.key});
   @override
   _LoginState createState() => _LoginState();
 }
@@ -63,11 +64,11 @@ class _LoginState extends State<Login>{
                     child: const Text('Log in'),
                   ),
                   const Spacer(),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(bottom: 10),
                     child: Text(
                       style:TextStyle(fontSize: 20),
-                      'No account?',
+                      AppLocalizations.of(context).noAccountQuestion,
                     ),
                   ),
                   ElevatedButton(
