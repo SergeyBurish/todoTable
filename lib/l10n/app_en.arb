@@ -1,4 +1,9 @@
 {
   "appTitle": "Todo Table",
+  "loginTitle": "Todo Table: Login",
+  "username": "Username",
+  "password": "Password",
+  "logIn": "Log in",
+  "createAnAccount": "Create an account",
   "noAccountQuestion": "No account?"
 }

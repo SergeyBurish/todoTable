@@ -1,4 +1,9 @@
 {
   "appTitle": "Список Задач",
+  "loginTitle": "Список Задач: Войти",
+  "username": "Имя пользователя",
+  "password": "Пароль",
+  "logIn": "Войти",
+  "createAnAccount": "Зарегистрироваться",
   "noAccountQuestion": "Нет аккаунта?"
 }

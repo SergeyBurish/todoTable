@@ -27,7 +27,7 @@ class _LoginState extends State<Login>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Todo Table'),
+        title: Text(L10n.of(context).loginTitle),
       ),
       body: Observer(
         builder: (_) {
@@ -43,37 +43,37 @@ class _LoginState extends State<Login>{
                 children: <Widget>[
                   const Spacer(flex: 2,),
                   TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Username'
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText: L10n.of(context).username,
                     ),
                     onChanged: _changeName,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: TextField(
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Password'
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText: L10n.of(context).password
                       ),
                       onChanged: _changePwd,
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () => appState.login(_username, _password), 
-                    child: const Text('Log in'),
+                    child: Text(L10n.of(context).logIn),
                   ),
                   const Spacer(),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      style:TextStyle(fontSize: 20),
+                      style:const TextStyle(fontSize: 20),
                       L10n.of(context).noAccountQuestion,
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () => print('Create an account'), 
-                    child: const Text('Create an account'),
+                    child: Text(L10n.of(context).createAnAccount),
                   ),
                   const Spacer(flex: 2,),
                 ],

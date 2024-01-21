@@ -25,8 +25,8 @@ class Application extends StatelessWidget {
       ),
       home: Observer(
         builder: (_) => switch (appState.currentPage) {
-          AppPage.login => Login(),
-          AppPage.todoList => TodoList(),
+          AppPage.login => const Login(),
+          AppPage.todoList => const TodoList(),
         },
       ),
     );
