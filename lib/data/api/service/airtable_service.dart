@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:todo_table/data/api/dto/todo_dto.dart';
 import 'package:todo_table/data/api/dto/todo_list_dto.dart';
 import 'package:todo_table/data/api/dto/user_dto.dart';
 import 'package:todo_table/data/api/request/get_todo_lists_request.dart';
+import 'package:todo_table/data/api/request/get_todos_request.dart';
 import 'package:todo_table/data/api/request/get_user_request.dart';
 
 class AirtableService {
@@ -28,5 +30,14 @@ class AirtableService {
       options: Options( headers: {"Authorization": "Bearer $_token"}, )
     );
     return TodoListsDto.fromApi(response.data);
+  }
+
+  Future<TodosDto> getTodos(GetTodosRequest request) async {
+    final response = await _dio.get(
+      '/Todos',
+      queryParameters: request.parameters(),
+      options: Options( headers: {"Authorization": "Bearer $_token"}, )
+    );
+    return TodosDto.fromApi(response.data);
   }
 }

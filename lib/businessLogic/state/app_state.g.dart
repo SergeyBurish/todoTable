@@ -89,6 +89,21 @@ mixin _$AppState on _AppState, Store {
     });
   }
 
+  late final _$todosAtom = Atom(name: '_AppState.todos', context: context);
+
+  @override
+  List<Todo> get todos {
+    _$todosAtom.reportRead();
+    return super.todos;
+  }
+
+  @override
+  set todos(List<Todo> value) {
+    _$todosAtom.reportWrite(value, super.todos, () {
+      super.todos = value;
+    });
+  }
+
   late final _$currentListAtom =
       Atom(name: '_AppState.currentList', context: context);
 
@@ -121,18 +136,12 @@ mixin _$AppState on _AppState, Store {
     return _$getListsAsyncAction.run(() => super.getLists());
   }
 
-  late final _$_AppStateActionController =
-      ActionController(name: '_AppState', context: context);
+  late final _$getTodosAsyncAction =
+      AsyncAction('_AppState.getTodos', context: context);
 
   @override
-  dynamic getTodos(String listName) {
-    final _$actionInfo =
-        _$_AppStateActionController.startAction(name: '_AppState.getTodos');
-    try {
-      return super.getTodos(listName);
-    } finally {
-      _$_AppStateActionController.endAction(_$actionInfo);
-    }
+  Future<void> getTodos(String listName) {
+    return _$getTodosAsyncAction.run(() => super.getTodos(listName));
   }
 
   @override
@@ -143,6 +152,7 @@ currentPage: ${currentPage},
 logInFail: ${logInFail},
 userName: ${userName},
 todoLists: ${todoLists},
+todos: ${todos},
 currentList: ${currentList}
     ''';
   }

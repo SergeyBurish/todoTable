@@ -31,11 +31,12 @@ class _TodosPageState extends State<TodosPage>{
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ListView.builder(
-              itemCount: 100,
+              itemCount: appState.todos.length,
               itemBuilder: (BuildContext context, int index) {
+                final todo = appState.todos.elementAt(index);
                 return ListTile(
-                  title: Text('Item $index'),
-                  onTap: () => print('tap on Todo $index'),
+                  title: Text('todo ${todo.name}'),
+                  onTap: () => print('tap on Todo ${todo.name}'),
                 );
               },
             ),

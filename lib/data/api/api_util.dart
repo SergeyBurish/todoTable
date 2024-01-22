@@ -1,10 +1,13 @@
 
+import 'package:todo_table/businessLogic/model/todo.dart';
 import 'package:todo_table/businessLogic/model/todo_list.dart';
 import 'package:todo_table/businessLogic/model/user.dart';
 import 'package:todo_table/data/api/request/get_todo_lists_request.dart';
+import 'package:todo_table/data/api/request/get_todos_request.dart';
 import 'package:todo_table/data/api/request/get_user_request.dart';
 import 'package:todo_table/data/api/service/airtable_service.dart';
 import 'package:todo_table/data/mapper/todo_lists_mapper.dart';
+import 'package:todo_table/data/mapper/todos_mapper.dart';
 import 'package:todo_table/data/mapper/user_mapper.dart';
 
 class ApiUtil {
@@ -27,5 +30,14 @@ class ApiUtil {
     final request = GetTodoListsRequest(owner: owner);
     final result = await _airtableService.getTodoLists(request);
     return TodoListsMapper.fromDto(result);
+  }
+
+  Future<List<Todo>> getTodos({
+    required String owner,
+    required String list,
+  }) async {
+    final request = GetTodosRequest(owner: owner, list: list);
+    final result = await _airtableService.getTodos(request);
+    return TodosMapper.fromDto(result);
   }
 }

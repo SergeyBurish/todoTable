@@ -1,4 +1,5 @@
 
+import 'package:todo_table/businessLogic/model/todo.dart';
 import 'package:todo_table/businessLogic/model/todo_list.dart';
 import 'package:todo_table/businessLogic/model/user.dart';
 import 'package:todo_table/businessLogic/repository/repository.dart';
@@ -17,5 +18,10 @@ class DataRepository extends Repository {
   @override
   Future<List<TodoList>> getTodoLists({required String owner}) {
     return _apiUtil.getTodoLists(owner: owner);
+  }
+
+  @override
+  Future<List<Todo>> getTodos({required String owner, required String list}) {
+    return _apiUtil.getTodos(owner: owner, list: list);
   }
 }

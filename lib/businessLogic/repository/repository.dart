@@ -1,4 +1,5 @@
 
+import 'package:todo_table/businessLogic/model/todo.dart';
 import 'package:todo_table/businessLogic/model/todo_list.dart';
 import 'package:todo_table/businessLogic/model/user.dart';
 
@@ -11,4 +12,8 @@ abstract class Repository {
   Future<List<TodoList>> getTodoLists({
     required String owner,
   });
+
+  Future<List<Todo>> getTodos({
+    required String owner, 
+    required String list});
 }

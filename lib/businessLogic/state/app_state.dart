@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:todo_table/businessLogic/model/todo.dart';
 import 'package:todo_table/businessLogic/model/todo_list.dart';
 import 'package:todo_table/businessLogic/repository/repository.dart';
 
@@ -36,6 +37,9 @@ abstract class _AppState with Store {
   List<TodoList> todoLists = [];
 
   @observable
+  List<Todo> todos = [];
+
+  @observable
   String currentList = '';
 
   @action
@@ -60,8 +64,13 @@ abstract class _AppState with Store {
   }
 
   @action
-  getTodos(String listName) {
+  Future<void> getTodos(String listName) async {
+    isLoading = true;
+
+    todos = await _repository.getTodos(owner: userName, list: listName);
     currentList = listName;
     currentPage = AppPage.todos;
+
+    isLoading = true;
   }
 }
