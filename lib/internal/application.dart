@@ -3,8 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_table/businessLogic/state/app_state.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
 import 'package:todo_table/l10n/l10n.dart';
-import 'package:todo_table/presentation/login.dart';
-import 'package:todo_table/presentation/todo_list.dart';
+import 'package:todo_table/presentation/login_page.dart';
+import 'package:todo_table/presentation/todo_list_page.dart';
 
 final appState = StateModule.appState();
 
@@ -25,7 +25,7 @@ class Application extends StatelessWidget {
       ),
       home: Observer(
         builder: (_) => switch (appState.currentPage) {
-          AppPage.login => const Login(),
+          AppPage.login => const LoginPage(),
           AppPage.todoList => const TodoListPage(),
         },
       ),

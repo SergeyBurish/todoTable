@@ -5,12 +5,12 @@ import 'package:todo_table/l10n/l10n.dart';
 
 final appState = StateModule.appState();
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
   @override
-  _LoginState createState() => _LoginState();
+  createState() => _LoginPageState();
 }
-class _LoginState extends State<Login>{
+class _LoginPageState extends State<LoginPage>{
 
   String _username = '';
   String _password = '';
