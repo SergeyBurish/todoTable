@@ -7,7 +7,8 @@ part 'app_state.g.dart';
 
 enum AppPage{
     login,
-    todoList,
+    todoLists,
+    todos,
 }
 
 // This is the class used by rest of your codebase
@@ -34,6 +35,9 @@ abstract class _AppState with Store {
   @observable
   List<TodoList> todoLists = [];
 
+  @observable
+  String currentList = '';
+
   @action
   Future<void> login(String name, String password) async {
     isLoading = true;
@@ -42,16 +46,22 @@ abstract class _AppState with Store {
     if (users.isNotEmpty) {
       userName = users.first.name;
     }
-    currentPage = users.isEmpty ? AppPage.login : AppPage.todoList;
+    currentPage = users.isEmpty ? AppPage.login : AppPage.todoLists;
     logInFail = users.isEmpty;
 
     isLoading = false;
   }
 
   @action
-  Future<void> getLists(String owner) async {
+  Future<void> getLists() async {
     isLoading = true;
-    todoLists = await _repository.getTodoLists(owner: owner);
+    todoLists = await _repository.getTodoLists(owner: userName);
     isLoading = false;
+  }
+
+  @action
+  getTodos(String listName) {
+    currentList = listName;
+    currentPage = AppPage.todos;
   }
 }

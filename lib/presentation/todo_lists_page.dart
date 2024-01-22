@@ -4,8 +4,19 @@ import 'package:todo_table/internal/dependencies/state_module.dart';
 
 final appState = StateModule.appState();
 
-class TodoListPage extends StatelessWidget {
-  const TodoListPage({super.key});
+class TodoListsPage extends StatefulWidget {
+  const TodoListsPage({super.key});
+  @override
+  createState() => _TodoListsPageState();
+}
+
+class _TodoListsPageState extends State<TodoListsPage>{
+
+  @override
+  void initState() {
+    appState.getLists();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +33,10 @@ class TodoListPage extends StatelessWidget {
             child: ListView.builder(
               itemCount: appState.todoLists.length,
               itemBuilder: (BuildContext context, int index) {
+                final todoList = appState.todoLists.elementAt(index);
                 return ListTile(
-                  title: Text('Item ${appState.todoLists.elementAt(index).name}'),
-                  onTap: () => print('tap on $index'),
+                  title: Text('Item ${todoList.name}'),
+                  onTap: () => appState.getTodos(todoList.name), // print('tap on $index'),
                 );
               },
             ),

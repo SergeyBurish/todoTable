@@ -89,6 +89,22 @@ mixin _$AppState on _AppState, Store {
     });
   }
 
+  late final _$currentListAtom =
+      Atom(name: '_AppState.currentList', context: context);
+
+  @override
+  String get currentList {
+    _$currentListAtom.reportRead();
+    return super.currentList;
+  }
+
+  @override
+  set currentList(String value) {
+    _$currentListAtom.reportWrite(value, super.currentList, () {
+      super.currentList = value;
+    });
+  }
+
   late final _$loginAsyncAction =
       AsyncAction('_AppState.login', context: context);
 
@@ -101,8 +117,22 @@ mixin _$AppState on _AppState, Store {
       AsyncAction('_AppState.getLists', context: context);
 
   @override
-  Future<void> getLists(String owner) {
-    return _$getListsAsyncAction.run(() => super.getLists(owner));
+  Future<void> getLists() {
+    return _$getListsAsyncAction.run(() => super.getLists());
+  }
+
+  late final _$_AppStateActionController =
+      ActionController(name: '_AppState', context: context);
+
+  @override
+  dynamic getTodos(String listName) {
+    final _$actionInfo =
+        _$_AppStateActionController.startAction(name: '_AppState.getTodos');
+    try {
+      return super.getTodos(listName);
+    } finally {
+      _$_AppStateActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
@@ -112,7 +142,8 @@ isLoading: ${isLoading},
 currentPage: ${currentPage},
 logInFail: ${logInFail},
 userName: ${userName},
-todoLists: ${todoLists}
+todoLists: ${todoLists},
+currentList: ${currentList}
     ''';
   }
 }
