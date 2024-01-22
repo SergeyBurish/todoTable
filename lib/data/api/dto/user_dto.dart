@@ -15,6 +15,7 @@ class UsersDto {
     List<dynamic> records = map['records'];
 
     for(var record in records) {
+      print('*' * 10);
       users.add(UserDto.fromApi(record));
     }
   }

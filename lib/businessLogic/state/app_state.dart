@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:todo_table/businessLogic/model/todo_list.dart';
 import 'package:todo_table/businessLogic/repository/repository.dart';
 
 // Include generated file
@@ -30,6 +31,9 @@ abstract class _AppState with Store {
   @observable
   String userName = '';
 
+  @observable
+  List<TodoList> todoLists = [];
+
   @action
   Future<void> login(String name, String password) async {
     isLoading = true;
@@ -41,6 +45,13 @@ abstract class _AppState with Store {
     currentPage = users.isEmpty ? AppPage.login : AppPage.todoList;
     logInFail = users.isEmpty;
 
+    isLoading = false;
+  }
+
+  @action
+  Future<void> getLists(String owner) async {
+    isLoading = true;
+    todoLists = await _repository.getTodoLists(owner: owner);
     isLoading = false;
   }
 }

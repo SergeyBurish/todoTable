@@ -4,27 +4,32 @@ import 'package:todo_table/internal/dependencies/state_module.dart';
 
 final appState = StateModule.appState();
 
-class TodoList extends StatelessWidget {
-  const TodoList({super.key});
+class TodoListPage extends StatelessWidget {
+  const TodoListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todo Lists'),
+        title: Observer(builder: (_) {
+              return Text('Todo Lists; Username: ${appState.userName}');
+            }),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Username:',
+        child: Observer(builder: (_) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: ListView.builder(
+              itemCount: appState.todoLists.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text('Item ${appState.todoLists.elementAt(index).name}'),
+                  onTap: () => print('tap on $index'),
+                );
+              },
             ),
-            Observer(builder: (_) {
-              return Text('${appState.userName}');
-            })
-          ],
-        ),
+          );
+        })
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => print('Test'),

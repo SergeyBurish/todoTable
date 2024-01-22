@@ -73,6 +73,22 @@ mixin _$AppState on _AppState, Store {
     });
   }
 
+  late final _$todoListsAtom =
+      Atom(name: '_AppState.todoLists', context: context);
+
+  @override
+  List<TodoList> get todoLists {
+    _$todoListsAtom.reportRead();
+    return super.todoLists;
+  }
+
+  @override
+  set todoLists(List<TodoList> value) {
+    _$todoListsAtom.reportWrite(value, super.todoLists, () {
+      super.todoLists = value;
+    });
+  }
+
   late final _$loginAsyncAction =
       AsyncAction('_AppState.login', context: context);
 
@@ -81,13 +97,22 @@ mixin _$AppState on _AppState, Store {
     return _$loginAsyncAction.run(() => super.login(name, password));
   }
 
+  late final _$getListsAsyncAction =
+      AsyncAction('_AppState.getLists', context: context);
+
+  @override
+  Future<void> getLists(String owner) {
+    return _$getListsAsyncAction.run(() => super.getLists(owner));
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 currentPage: ${currentPage},
 logInFail: ${logInFail},
-userName: ${userName}
+userName: ${userName},
+todoLists: ${todoLists}
     ''';
   }
 }
