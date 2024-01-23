@@ -5,5 +5,7 @@
   "password": "Password",
   "logIn": "Log in",
   "createAnAccount": "Create an account",
-  "noAccountQuestion": "No account?"
+  "noAccountQuestion": "No account?",
+  "addTodo": "Add Todo",
+  "addTodoList": "Add Todo List"
 }

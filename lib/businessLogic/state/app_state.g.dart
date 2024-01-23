@@ -144,6 +144,31 @@ mixin _$AppState on _AppState, Store {
     return _$getTodosAsyncAction.run(() => super.getTodos(listName));
   }
 
+  late final _$_AppStateActionController =
+      ActionController(name: '_AppState', context: context);
+
+  @override
+  void goToListEdit() {
+    final _$actionInfo =
+        _$_AppStateActionController.startAction(name: '_AppState.goToListEdit');
+    try {
+      return super.goToListEdit();
+    } finally {
+      _$_AppStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void goToTodoEdit() {
+    final _$actionInfo =
+        _$_AppStateActionController.startAction(name: '_AppState.goToTodoEdit');
+    try {
+      return super.goToTodoEdit();
+    } finally {
+      _$_AppStateActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

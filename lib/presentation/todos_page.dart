@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
+import 'package:todo_table/l10n/l10n.dart';
 
 final appState = StateModule.appState();
 
@@ -47,9 +48,9 @@ class _TodosPageState extends State<TodosPage>{
         );}
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => print('Test'),
-        tooltip: 'Test',
-        child: Icon(Icons.question_mark),
+        onPressed: () => appState.goToTodoEdit(),
+        tooltip: L10n.of(context).addTodo,
+        child: const Icon(Icons.add),
       ),
     );
   }

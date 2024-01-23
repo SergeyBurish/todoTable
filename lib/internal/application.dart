@@ -3,7 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_table/businessLogic/state/app_state.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
 import 'package:todo_table/l10n/l10n.dart';
+import 'package:todo_table/presentation/list_edit_page.dart';
 import 'package:todo_table/presentation/login_page.dart';
+import 'package:todo_table/presentation/todo_edit_page.dart';
 import 'package:todo_table/presentation/todo_lists_page.dart';
 import 'package:todo_table/presentation/todos_page.dart';
 
@@ -29,6 +31,8 @@ class Application extends StatelessWidget {
           AppPage.login => const LoginPage(),
           AppPage.todoLists => const TodoListsPage(),
           AppPage.todos => const TodosPage(),
+          AppPage.listEdit => const ListEditPage(),
+          AppPage.todoEdit => const TodoEditPage(),
         },
       ),
     );

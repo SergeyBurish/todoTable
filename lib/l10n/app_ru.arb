@@ -5,5 +5,7 @@
   "password": "Пароль",
   "logIn": "Войти",
   "createAnAccount": "Зарегистрироваться",
-  "noAccountQuestion": "Нет аккаунта?"
+  "noAccountQuestion": "Нет аккаунта?",
+  "addTodo": "Добавить задачу",
+  "addTodoList": "Добавить список задач"
 }

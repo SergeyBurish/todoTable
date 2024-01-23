@@ -10,6 +10,8 @@ enum AppPage{
     login,
     todoLists,
     todos,
+    listEdit,
+    todoEdit,
 }
 
 // This is the class used by rest of your codebase
@@ -72,5 +74,15 @@ abstract class _AppState with Store {
     currentPage = AppPage.todos;
 
     isLoading = false;
+  }
+
+  @action
+  void goToListEdit () {
+    currentPage = AppPage.listEdit;
+  }
+
+  @action
+  void goToTodoEdit () {
+    currentPage = AppPage.todoEdit;
   }
 }
