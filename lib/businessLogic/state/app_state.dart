@@ -71,6 +71,6 @@ abstract class _AppState with Store {
     currentList = listName;
     currentPage = AppPage.todos;
 
-    isLoading = true;
+    isLoading = false;
   }
 }

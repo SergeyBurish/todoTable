@@ -22,13 +22,17 @@ class _TodoListsPageState extends State<TodoListsPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Observer(builder: (_) {
-              return Text('Todo Lists; Username: ${appState.userName}');
-            }),
+        title: 
+              Text('Todo Lists; Username: ${appState.userName}'),
       ),
-      body: Center(
-        child: Observer(builder: (_) {
-          return Padding(
+      body: Observer(builder: (_){ 
+        if (appState.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return Center(
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ListView.builder(
               itemCount: appState.todoLists.length,
@@ -36,12 +40,12 @@ class _TodoListsPageState extends State<TodoListsPage>{
                 final todoList = appState.todoLists.elementAt(index);
                 return ListTile(
                   title: Text('Item ${todoList.name}'),
-                  onTap: () => appState.getTodos(todoList.name), // print('tap on $index'),
+                  onTap: () => appState.getTodos(todoList.name),
                 );
               },
             ),
-          );
-        })
+          )
+        );}
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => print('Test'),

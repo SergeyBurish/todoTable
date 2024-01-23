@@ -22,13 +22,16 @@ class _TodosPageState extends State<TodosPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Observer(builder: (_) {
-              return Text('Todos; List selected: ${appState.currentList}');
-            }),
+        title: Text('Todos; List selected: ${appState.currentList}'),
       ),
-      body: Center(
-        child: Observer(builder: (_) {
-          return Padding(
+      body: Observer(builder: (_) {
+        if (appState.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return Center(
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ListView.builder(
               itemCount: appState.todos.length,
@@ -40,8 +43,8 @@ class _TodosPageState extends State<TodosPage>{
                 );
               },
             ),
-          );
-        })
+          )
+        );}
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => print('Test'),
