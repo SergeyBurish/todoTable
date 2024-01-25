@@ -1,6 +1,6 @@
 
 import 'package:todo_table/data/api/api_util.dart';
-import 'package:todo_table/data/api/service/airtable_service.dart';
+import 'package:todo_table/data/api/service/supabase_service.dart';
 
 class ApiModule {
   static ApiUtil? _apiUtil;
