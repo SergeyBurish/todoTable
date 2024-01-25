@@ -6,6 +6,6 @@ class ApiModule {
   static ApiUtil? _apiUtil;
 
   static ApiUtil apiUtil() {
-    return _apiUtil ?? (_apiUtil = ApiUtil(AirtableService()));
+    return _apiUtil ?? (_apiUtil = ApiUtil(SupabaseService()));
   }
 }

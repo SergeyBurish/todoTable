@@ -6,7 +6,7 @@ import 'package:todo_table/data/api/request/get_todo_lists_request.dart';
 import 'package:todo_table/data/api/request/get_todos_request.dart';
 import 'package:todo_table/data/api/request/get_user_request.dart';
 
-class AirtableService {
+class SupabaseService {
   static const _BASE_URL = 'https://uasykwsowerdpgquvslr.supabase.co/rest/v1';
   static const _apikey = 'supabaseApikey';
 

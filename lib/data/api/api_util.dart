@@ -11,16 +11,16 @@ import 'package:todo_table/data/mapper/todos_mapper.dart';
 import 'package:todo_table/data/mapper/user_mapper.dart';
 
 class ApiUtil {
-  final AirtableService _airtableService;
+  final SupabaseService _supabaseService;
 
-  ApiUtil(this._airtableService);
+  ApiUtil(this._supabaseService);
 
   Future<List<User>> getUser({
     required String name,
     required String password,
   }) async {
     final request = GetUserRequest(name: name, password: password);
-    final result = await _airtableService.getUser(request);
+    final result = await _supabaseService.getUser(request);
     return UserMapper.fromDto(result);
   }
 
@@ -28,7 +28,7 @@ class ApiUtil {
     required String owner,
   }) async {
     final request = GetTodoListsRequest(owner: owner);
-    final result = await _airtableService.getTodoLists(request);
+    final result = await _supabaseService.getTodoLists(request);
     return TodoListsMapper.fromDto(result);
   }
 
@@ -37,7 +37,7 @@ class ApiUtil {
     required String list,
   }) async {
     final request = GetTodosRequest(owner: owner, list: list);
-    final result = await _airtableService.getTodos(request);
+    final result = await _supabaseService.getTodos(request);
     return TodosMapper.fromDto(result);
   }
 }
