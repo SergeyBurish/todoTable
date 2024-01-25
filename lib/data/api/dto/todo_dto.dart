@@ -6,18 +6,16 @@ class TodoDto {
   String? description;
 
   TodoDto.fromApi(dynamic record) 
-    : name =        record['fields']['Name'],
-      important =     record['fields']['Important'] ?? false,
-      completed =     record['fields']['Completed'] ?? false,
-      description = record['fields']['Description'];
+    : name =        record['name'],
+      important =   record['important'] ?? false,
+      completed =   record['completed'] ?? false,
+      description = record['description'];
 }
 
 class TodosDto {
   List<TodoDto> todos = [];
 
-  TodosDto.fromApi(Map<String, dynamic> map) {
-    List<dynamic> records = map['records'];
-
+  TodosDto.fromApi(List<dynamic> records) {
     for(var record in records) {
       todos.add(TodoDto.fromApi(record));
     }

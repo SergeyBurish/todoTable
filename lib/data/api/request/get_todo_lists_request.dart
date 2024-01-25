@@ -7,6 +7,6 @@ class GetTodoListsRequest {
   });
 
   Map<String, dynamic> parameters() {
-    return {'filterByFormula': "{Owner}='$owner'",};
+    return {'user': 'eq.$owner',};
   }
 }

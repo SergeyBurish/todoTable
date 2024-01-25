@@ -7,8 +7,8 @@ import 'package:todo_table/data/api/request/get_todos_request.dart';
 import 'package:todo_table/data/api/request/get_user_request.dart';
 
 class AirtableService {
-  static const _BASE_URL = 'https://api.airtable.com/v0/appal3ocGrE9dpt3I';
-  static const _token = "pat65DA0Jg6YfYcS0.ba2a281f0fa118edf0c6076e93697f96b2c638c781c806eda7b1525b9764af1b";
+  static const _BASE_URL = 'https://uasykwsowerdpgquvslr.supabase.co/rest/v1';
+  static const _apikey = 'supabaseApikey';
 
   final Dio _dio = Dio(
     BaseOptions(baseUrl: _BASE_URL),
@@ -16,27 +16,27 @@ class AirtableService {
 
   Future<UsersDto> getUser(GetUserRequest request) async {
     final response = await _dio.get(
-      '/Users',
+      '/user',
       queryParameters: request.parameters(),
-      options: Options( headers: {"Authorization": "Bearer $_token"}, )
+      options: Options( headers: {'apikey': _apikey}, )
     );
     return UsersDto.fromApi(response.data);
   }
 
   Future<TodoListsDto> getTodoLists(GetTodoListsRequest request) async {
     final response = await _dio.get(
-      '/TodoLists',
+      '/todoList',
       queryParameters: request.parameters(),
-      options: Options( headers: {"Authorization": "Bearer $_token"}, )
+      options: Options( headers: {'apikey': _apikey}, )
     );
     return TodoListsDto.fromApi(response.data);
   }
 
   Future<TodosDto> getTodos(GetTodosRequest request) async {
     final response = await _dio.get(
-      '/Todos',
+      '/todo',
       queryParameters: request.parameters(),
-      options: Options( headers: {"Authorization": "Bearer $_token"}, )
+      options: Options( headers: {'apikey': _apikey}, )
     );
     return TodosDto.fromApi(response.data);
   }

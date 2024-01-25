@@ -8,6 +8,6 @@ class GetUserRequest {
   });
 
   Map<String, dynamic> parameters() {
-    return {'filterByFormula': "AND({Name}='$name',{Password}='$password')",};
+    return {'name': 'eq.$name', 'password': 'eq.$password',};
   }
 }

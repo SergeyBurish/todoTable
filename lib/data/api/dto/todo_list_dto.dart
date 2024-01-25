@@ -5,17 +5,15 @@ class TodoListDto {
   String? description;
 
   TodoListDto.fromApi(dynamic record) 
-    : name =        record['fields']['Name'],
-      private =     record['fields']['Private'] ?? false,
-      description = record['fields']['Description'];
+    : name =        record['name'],
+      private =     record['private'] ?? false,
+      description = record['description'];
 }
 
 class TodoListsDto {
   List<TodoListDto> lists = [];
 
-  TodoListsDto.fromApi(Map<String, dynamic> map) {
-    List<dynamic> records = map['records'];
-
+  TodoListsDto.fromApi(List<dynamic> records) {
     for(var record in records) {
       lists.add(TodoListDto.fromApi(record));
     }

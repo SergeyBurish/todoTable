@@ -9,6 +9,6 @@ class GetTodosRequest {
   });
 
   Map<String, dynamic> parameters() {
-    return {'filterByFormula': "AND({Owner}='$owner',{List}='$list')",};
+    return {'user': 'eq.$owner', 'list': 'eq.$list',};
   }
 }
