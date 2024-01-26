@@ -24,8 +24,8 @@ class _TodosPageState extends State<TodosPage>{
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-            onPressed: () => appState.goToLists(),
-          ),
+          onPressed: () => appState.goToLists(),
+        ),
         title: Text('Todos; List selected: ${appState.currentList}'),
       ),
       body: Observer(builder: (_) {

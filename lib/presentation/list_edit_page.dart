@@ -33,6 +33,9 @@ class _ListEditPage extends State<ListEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: () => appState.goToLists(),
+        ),
         title: Text(L10n.of(context).newTodoList),
       ),
       body: Column(

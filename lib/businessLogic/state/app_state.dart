@@ -93,6 +93,11 @@ abstract class _AppState with Store {
   }
 
   @action
+  void goToTodos () {
+    currentPage = AppPage.todos;
+  }
+
+  @action
   void goToListEdit () {
     currentPage = AppPage.listEdit;
   }
