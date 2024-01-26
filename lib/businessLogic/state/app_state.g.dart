@@ -157,6 +157,17 @@ mixin _$AppState on _AppState, Store {
       ActionController(name: '_AppState', context: context);
 
   @override
+  void goToLists() {
+    final _$actionInfo =
+        _$_AppStateActionController.startAction(name: '_AppState.goToLists');
+    try {
+      return super.goToLists();
+    } finally {
+      _$_AppStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void goToListEdit() {
     final _$actionInfo =
         _$_AppStateActionController.startAction(name: '_AppState.goToListEdit');

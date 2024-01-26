@@ -35,44 +35,39 @@ class _ListEditPage extends State<ListEditPage> {
       appBar: AppBar(
         title: Text(L10n.of(context).newTodoList),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextField(
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  hintText: L10n.of(context).listName,
-                ),
-                onChanged: _changeName,
-              ),
-              const SizedBox(height: 20,),
-              TextField(
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  hintText: L10n.of(context).listDescription,
-                ),
-                onChanged: _changeDescription,
-              ),
-              const SizedBox(height: 20,),
-              CheckboxListTile(
-                title: Text(L10n.of(context).private),
-                value: _private,
-                onChanged: _changePrivate,
-                controlAffinity: ListTileControlAffinity.trailing,
-              ),
-              const SizedBox(height: 20,),
-              ElevatedButton(
-                  onPressed: () => appState.saveList(_name, _description, _private), 
-                  child: Text(L10n.of(context).save),
-                ),
-            ],
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextField(
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: L10n.of(context).listName,
+            ),
+            onChanged: _changeName,
           ),
-        )
-        ),
+          const SizedBox(height: 20,),
+          TextField(
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: L10n.of(context).listDescription,
+            ),
+            onChanged: _changeDescription,
+          ),
+          const SizedBox(height: 20,),
+          CheckboxListTile(
+            title: Text(L10n.of(context).private),
+            value: _private,
+            onChanged: _changePrivate,
+            controlAffinity: ListTileControlAffinity.trailing,
+          ),
+          const SizedBox(height: 20,),
+          ElevatedButton(
+            onPressed: () => appState.saveList(_name, _description, _private), 
+            child: Text(L10n.of(context).save),
+          ),
+        ],
+      ),
       );
   }
 }

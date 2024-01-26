@@ -32,20 +32,15 @@ class _TodoListsPageState extends State<TodoListsPage>{
             child: CircularProgressIndicator(),
           );
         }
-        return Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: ListView.builder(
-              itemCount: appState.todoLists.length,
-              itemBuilder: (BuildContext context, int index) {
-                final todoList = appState.todoLists.elementAt(index);
-                return ListTile(
-                  title: Text('Item ${todoList.name}'),
-                  onTap: () => appState.getTodos(todoList.name),
-                );
-              },
-            ),
-          )
+        return ListView.builder(
+          itemCount: appState.todoLists.length,
+          itemBuilder: (BuildContext context, int index) {
+            final todoList = appState.todoLists.elementAt(index);
+            return ListTile(
+              title: Text('Item ${todoList.name}'),
+              onTap: () => appState.getTodos(todoList.name),
+            );
+          },
         );}
       ),
       floatingActionButton: FloatingActionButton(

@@ -23,6 +23,9 @@ class _TodosPageState extends State<TodosPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+            onPressed: () => appState.goToLists(),
+          ),
         title: Text('Todos; List selected: ${appState.currentList}'),
       ),
       body: Observer(builder: (_) {
@@ -31,20 +34,15 @@ class _TodosPageState extends State<TodosPage>{
             child: CircularProgressIndicator(),
           );
         }
-        return Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: ListView.builder(
-              itemCount: appState.todos.length,
-              itemBuilder: (BuildContext context, int index) {
-                final todo = appState.todos.elementAt(index);
-                return ListTile(
-                  title: Text('todo ${todo.name}'),
-                  onTap: () => print('tap on Todo ${todo.name}'),
-                );
-              },
-            ),
-          )
+        return ListView.builder(
+          itemCount: appState.todos.length,
+          itemBuilder: (BuildContext context, int index) {
+            final todo = appState.todos.elementAt(index);
+            return ListTile(
+              title: Text('todo ${todo.name}'),
+              onTap: () => print('tap on Todo ${todo.name}'),
+            );
+          },
         );}
       ),
       floatingActionButton: FloatingActionButton(

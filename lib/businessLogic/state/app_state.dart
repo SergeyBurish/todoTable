@@ -87,6 +87,10 @@ abstract class _AppState with Store {
     isLoading = false;
   }
 
+  @action
+  void goToLists () {
+    currentPage = AppPage.todoLists;
+  }
 
   @action
   void goToListEdit () {

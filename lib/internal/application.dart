@@ -22,18 +22,32 @@ class Application extends StatelessWidget {
       localizationsDelegates: L10n.localizationDelegates,
       supportedLocales: L10n.supportedLocales,
       // locale: L10n.locale,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Observer(
-        builder: (_) => switch (appState.currentPage) {
-          AppPage.login => const LoginPage(),
-          AppPage.todoLists => const TodoListsPage(),
-          AppPage.todos => const TodosPage(),
-          AppPage.listEdit => const ListEditPage(),
-          AppPage.todoEdit => const TodoEditPage(),
-        },
+      home: Container(
+        decoration: const BoxDecoration(image: DecorationImage(
+            image: AssetImage("assets/background.jpg"),
+            repeat: ImageRepeat.repeat
+          ),
+        ),
+        child: Center(
+          child: Container(
+            decoration: BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 700),
+                child: Observer(
+                  builder: (_) => switch (appState.currentPage) {
+                    AppPage.login => const LoginPage(),
+                    AppPage.todoLists => const TodoListsPage(),
+                    AppPage.todos => const TodosPage(),
+                    AppPage.listEdit => const ListEditPage(),
+                    AppPage.todoEdit => const TodoEditPage(),
+                  },
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

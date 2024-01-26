@@ -36,49 +36,44 @@ class _LoginPageState extends State<LoginPage>{
               child: CircularProgressIndicator(),
             );
           }
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: <Widget>[
-                  const Spacer(flex: 2,),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText: L10n.of(context).username,
-                    ),
-                    onChanged: _changeName,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        hintText: L10n.of(context).password
-                      ),
-                      onChanged: _changePwd,
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => appState.login(_username, _password), 
-                    child: Text(L10n.of(context).logIn),
-                  ),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Text(
-                      style:const TextStyle(fontSize: 20),
-                      L10n.of(context).noAccountQuestion,
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => print('Create an account'), 
-                    child: Text(L10n.of(context).createAnAccount),
-                  ),
-                  const Spacer(flex: 2,),
-                ],
+          return Column(
+            children: <Widget>[
+              const Spacer(flex: 2,),
+              TextField(
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  hintText: L10n.of(context).username,
+                ),
+                onChanged: _changeName,
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    hintText: L10n.of(context).password
+                  ),
+                  onChanged: _changePwd,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () => appState.login(_username, _password), 
+                child: Text(L10n.of(context).logIn),
+              ),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Text(
+                  style:const TextStyle(fontSize: 20),
+                  L10n.of(context).noAccountQuestion,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () => print('Create an account'), 
+                child: Text(L10n.of(context).createAnAccount),
+              ),
+              const Spacer(flex: 2,),
+            ],
           );
         }
       ),
