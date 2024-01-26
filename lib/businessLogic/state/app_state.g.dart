@@ -144,6 +144,15 @@ mixin _$AppState on _AppState, Store {
     return _$getTodosAsyncAction.run(() => super.getTodos(listName));
   }
 
+  late final _$saveListAsyncAction =
+      AsyncAction('_AppState.saveList', context: context);
+
+  @override
+  Future<void> saveList(String listName, String description, bool private) {
+    return _$saveListAsyncAction
+        .run(() => super.saveList(listName, description, private));
+  }
+
   late final _$_AppStateActionController =
       ActionController(name: '_AppState', context: context);
 

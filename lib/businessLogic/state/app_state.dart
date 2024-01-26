@@ -77,6 +77,18 @@ abstract class _AppState with Store {
   }
 
   @action
+  Future<void> saveList (String listName, String description, bool private) async {
+    isLoading = true;
+
+    await _repository.saveTodoList(
+      owner: userName, name: listName, description: description, private: private);
+    currentPage = AppPage.todoLists;
+
+    isLoading = false;
+  }
+
+
+  @action
   void goToListEdit () {
     currentPage = AppPage.listEdit;
   }

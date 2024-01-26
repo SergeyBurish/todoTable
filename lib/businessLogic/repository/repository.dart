@@ -16,4 +16,10 @@ abstract class Repository {
   Future<List<Todo>> getTodos({
     required String owner, 
     required String list});
+
+  Future<void> saveTodoList({
+    required String owner,
+    required String name, 
+    required String description, 
+    required bool private});
 }

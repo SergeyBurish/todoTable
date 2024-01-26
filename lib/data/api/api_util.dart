@@ -5,6 +5,7 @@ import 'package:todo_table/businessLogic/model/user.dart';
 import 'package:todo_table/data/api/request/get_todo_lists_request.dart';
 import 'package:todo_table/data/api/request/get_todos_request.dart';
 import 'package:todo_table/data/api/request/get_user_request.dart';
+import 'package:todo_table/data/api/request/post_todo_list_request.dart';
 import 'package:todo_table/data/api/service/supabase_service.dart';
 import 'package:todo_table/data/mapper/todo_lists_mapper.dart';
 import 'package:todo_table/data/mapper/todos_mapper.dart';
@@ -40,4 +41,15 @@ class ApiUtil {
     final result = await _supabaseService.getTodos(request);
     return TodosMapper.fromDto(result);
   }
+
+  Future<void> saveTodoList({
+    required String owner,
+    required String name, 
+    required String description, 
+    required bool private}) async {
+      final request = PostTodoListRequest(
+        owner: owner, name: name, description: description, private: private);
+      return await _supabaseService.saveTodoList(request);
+  }
+
 }

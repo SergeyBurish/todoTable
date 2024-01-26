@@ -1,5 +1,7 @@
 {
   "appTitle": "Todo Table",
+  "save": "Save",
+  "@_____________________LOGIN_PAGE_____________________": {},
   "loginTitle": "Todo Table: Login",
   "username": "Username",
   "password": "Password",
@@ -7,5 +9,10 @@
   "createAnAccount": "Create an account",
   "noAccountQuestion": "No account?",
   "addTodo": "Add Todo",
-  "addTodoList": "Add Todo List"
+  "addTodoList": "Add Todo List",
+  "@_____________________EDIT_LIST_PAGE_____________________": {},
+  "newTodoList": "New Todo List",
+  "listName": "List Name",
+  "listDescription": "List Description",
+  "private": "Private"
 }
