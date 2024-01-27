@@ -201,6 +201,17 @@ mixin _$AppState on _AppState, Store {
   }
 
   @override
+  void logOut() {
+    final _$actionInfo =
+        _$_AppStateActionController.startAction(name: '_AppState.logOut');
+    try {
+      return super.logOut();
+    } finally {
+      _$_AppStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},

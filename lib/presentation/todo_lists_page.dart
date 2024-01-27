@@ -23,8 +23,34 @@ class _TodoListsPageState extends State<TodoListsPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: 
-              Text('Todo Lists; Username: ${appState.userName}'),
+        title: Text(L10n.of(context).todoLists),
+        actions: [MenuAnchor(
+          builder: (BuildContext context, MenuController controller, Widget? child) {
+            return ElevatedButton(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 120),
+                child: Text(appState.userName, overflow: TextOverflow.ellipsis,)), 
+              onPressed: () {
+                if (controller.isOpen) {
+                  controller.close();
+                } else {
+                  controller.open();
+                }
+              },
+            );
+          },
+          menuChildren: [
+            MenuItemButton(
+              onPressed: appState.logOut,
+              child: Row(
+                children: [
+                  const Icon(Icons.logout),
+                  Text(L10n.of(context).logOut),
+                ],
+              ),
+            )
+          ],)
+        ],
       ),
       body: Observer(builder: (_){ 
         if (appState.isLoading) {
@@ -42,8 +68,8 @@ class _TodoListsPageState extends State<TodoListsPage>{
                 children: [
                   Row(
                     children: [
-                      Expanded(child: Center(child: Text('Name'))),
-                      Text('private'),
+                      const Expanded(child: Center(child: Text('Name'))),
+                      const Text('private'),
                       Opacity(
                         opacity: 0, // hide icon but keep space
                         child: IconButton(icon: const Icon(Icons.delete), onPressed: (){},))

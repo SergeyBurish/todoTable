@@ -106,4 +106,10 @@ abstract class _AppState with Store {
   void goToTodoEdit () {
     currentPage = AppPage.todoEdit;
   }
+
+  @action
+  void logOut () {
+    userName = '';
+    currentPage = AppPage.login;
+  }
 }
