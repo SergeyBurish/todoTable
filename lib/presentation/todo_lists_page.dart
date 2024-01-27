@@ -32,15 +32,56 @@ class _TodoListsPageState extends State<TodoListsPage>{
             child: CircularProgressIndicator(),
           );
         }
-        return ListView.builder(
-          itemCount: appState.todoLists.length,
-          itemBuilder: (BuildContext context, int index) {
-            final todoList = appState.todoLists.elementAt(index);
-            return ListTile(
-              title: Text('Item ${todoList.name}'),
-              onTap: () => appState.getTodos(todoList.name),
-            );
-          },
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: DecoratedBox(
+            decoration: const BoxDecoration(boxShadow: [BoxShadow(blurRadius: 7, color: Colors.grey)]),
+            child: Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(child: Center(child: Text('Name'))),
+                      Text('private'),
+                      Opacity(
+                        opacity: 0, // hide icon but keep space
+                        child: IconButton(icon: const Icon(Icons.delete), onPressed: (){},))
+                    ],
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: appState.todoLists.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final todoList = appState.todoLists.elementAt(index);
+                        return InkWell(
+                          onTap: () => appState.getTodos(todoList.name),
+                          child: Container(
+                            color: (index % 2 == 0) ? Colors.black12 : Colors.white,
+                            child: Row(
+                              children: [
+                                Expanded(child: Center(child: Text(todoList.name))),
+                                Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 0, // hide text but keep width
+                                      child: Text('private')
+                                    ),
+                                    todoList.private ? const Icon(Icons.check_box) : const Icon(Icons.check_box_outline_blank),
+                                  ],
+                                ),
+                                IconButton(icon: const Icon(Icons.delete), onPressed: ()=>print('tap on ${todoList.name}'),)
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         );}
       ),
       floatingActionButton: FloatingActionButton(
