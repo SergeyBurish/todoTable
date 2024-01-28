@@ -5,7 +5,7 @@ import 'package:todo_table/data/api/dto/user_dto.dart';
 import 'package:todo_table/data/api/request/get_todo_lists_request.dart';
 import 'package:todo_table/data/api/request/get_todos_request.dart';
 import 'package:todo_table/data/api/request/get_user_request.dart';
-import 'package:todo_table/data/api/request/post_todo_list_request.dart';
+import 'package:todo_table/data/api/request/change_todo_list_request.dart';
 
 class SupabaseService {
   static const _BASE_URL = 'https://uasykwsowerdpgquvslr.supabase.co/rest/v1';
