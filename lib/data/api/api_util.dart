@@ -47,9 +47,16 @@ class ApiUtil {
     required String name, 
     required String description, 
     required bool private}) async {
-      final request = PostTodoListRequest(
+      final request = ChangeTodoListRequest(
         owner: owner, name: name, description: description, private: private);
       return await _supabaseService.saveTodoList(request);
   }
 
+  Future<void> deleteTodoList({
+    required String owner,
+    required String name}) async {
+      final request = ChangeTodoListRequest(
+        owner: owner, name: name);
+      return await _supabaseService.deleteTodoList(request);
+  }
 }

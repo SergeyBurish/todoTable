@@ -96,7 +96,10 @@ class _TodoListsPageState extends State<TodoListsPage>{
                                     todoList.private ? const Icon(Icons.check_box) : const Icon(Icons.check_box_outline_blank),
                                   ],
                                 ),
-                                IconButton(icon: const Icon(Icons.delete), onPressed: ()=>print('tap on ${todoList.name}'),)
+                                IconButton(
+                                  icon: const Icon(Icons.delete), 
+                                  onPressed: () => appState.deleteList(todoList.name),
+                                )
                               ],
                             ),
                           ),

@@ -88,6 +88,16 @@ abstract class _AppState with Store {
   }
 
   @action
+  Future<void> deleteList (String listName) async {
+    isLoading = true;
+
+    await _repository.deleteTodoList(owner: userName, name: listName);
+    todoLists = await _repository.getTodoLists(owner: userName); // update lists after delete
+
+    isLoading = false;
+  }
+
+  @action
   void goToLists () {
     currentPage = AppPage.todoLists;
   }

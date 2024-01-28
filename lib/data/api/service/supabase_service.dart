@@ -42,8 +42,7 @@ class SupabaseService {
     return TodosDto.fromApi(response.data);
   }
 
-  Future<void> saveTodoList(PostTodoListRequest request) async {
-
+  Future<void> saveTodoList(ChangeTodoListRequest request) async {
     final response = await _dio.post(
       '/todoList',
       data: request.data(),
@@ -53,4 +52,13 @@ class SupabaseService {
     print('saveTodoList response statusCode ${response.statusCode}');
   }
 
+  Future<void> deleteTodoList(ChangeTodoListRequest request) async {
+    final response = await _dio.delete(
+      '/todoList',
+      queryParameters: request.parameters(),
+      options: Options( headers: {"apikey": _apikey, "Content-Type": "application/json"}, )
+    );
+
+    print('deleteTodoList response statusCode ${response.statusCode}');
+  }
 }

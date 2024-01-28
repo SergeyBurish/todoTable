@@ -1,15 +1,19 @@
-class PostTodoListRequest {
+class ChangeTodoListRequest {
   final String owner;
   final String name;
   final String description;
   final bool private;
 
-  PostTodoListRequest({
+  ChangeTodoListRequest({
     required this.owner,
     required this.name,
-    required this.description,
-    required this.private,
+    this.description = '',
+    this.private = false,
   });
+
+  Map<String, dynamic> parameters() {
+    return {'user': 'eq.$owner', 'name': 'eq.$name',};
+  }
 
   Map<String, String> data() {
     return {

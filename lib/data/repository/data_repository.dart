@@ -25,11 +25,19 @@ class DataRepository extends Repository {
     return _apiUtil.getTodos(owner: owner, list: list);
   }
 
+  @override
   Future<void> saveTodoList({
-    required String owner,
-    required String name, 
-    required String description, 
-    required bool private}) {
+      required String owner,
+      required String name, 
+      required String description, 
+      required bool private}) {
     return _apiUtil.saveTodoList(owner: owner, name: name, description: description, private: private);
+  }
+
+  @override
+  Future<void> deleteTodoList({
+      required String owner,
+      required String name}) {
+    return _apiUtil.deleteTodoList(owner: owner, name: name);
   }
 }

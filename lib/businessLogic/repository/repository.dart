@@ -22,4 +22,8 @@ abstract class Repository {
     required String name, 
     required String description, 
     required bool private});
+
+  Future<void> deleteTodoList({
+    required String owner,
+    required String name});
 }

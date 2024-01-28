@@ -153,6 +153,14 @@ mixin _$AppState on _AppState, Store {
         .run(() => super.saveList(listName, description, private));
   }
 
+  late final _$deleteListAsyncAction =
+      AsyncAction('_AppState.deleteList', context: context);
+
+  @override
+  Future<void> deleteList(String listName) {
+    return _$deleteListAsyncAction.run(() => super.deleteList(listName));
+  }
+
   late final _$_AppStateActionController =
       ActionController(name: '_AppState', context: context);
 
