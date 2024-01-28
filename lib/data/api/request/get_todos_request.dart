@@ -9,6 +9,6 @@ class GetTodosRequest {
   });
 
   Map<String, dynamic> parameters() {
-    return {'user': 'eq.$owner', 'list': 'eq.$list',};
+    return {'owner': 'eq.$owner', 'list': 'eq.$list',};
   }
 }

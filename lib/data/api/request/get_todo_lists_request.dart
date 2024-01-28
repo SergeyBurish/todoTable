@@ -7,6 +7,6 @@ class GetTodoListsRequest {
   });
 
   Map<String, dynamic> parameters() {
-    return {'user': 'eq.$owner',};
+    return {'owner': 'eq.$owner',};
   }
 }

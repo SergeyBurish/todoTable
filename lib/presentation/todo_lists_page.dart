@@ -98,7 +98,26 @@ class _TodoListsPageState extends State<TodoListsPage>{
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.delete), 
-                                  onPressed: () => appState.deleteList(todoList.name),
+                                  onPressed: () => showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) => AlertDialog(
+                                      title: Text(L10n.of(context).deleteList),
+                                      content: Text(L10n.of(context).deleteListMessage(todoList.name)),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                                          child: const Text('Cancel'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context, 'OK');
+                                            appState.deleteList(todoList.name);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 )
                               ],
                             ),

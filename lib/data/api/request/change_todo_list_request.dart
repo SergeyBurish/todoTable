@@ -12,12 +12,12 @@ class ChangeTodoListRequest {
   });
 
   Map<String, dynamic> parameters() {
-    return {'user': 'eq.$owner', 'name': 'eq.$name',};
+    return {'owner': 'eq.$owner', 'name': 'eq.$name',};
   }
 
   Map<String, String> data() {
     return {
-      'user': owner,
+      'owner': owner,
       'name': name,
       'description': description,
       'private': '$private',};

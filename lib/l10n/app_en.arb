@@ -12,6 +12,8 @@
   "todoLists": "Todo Lists",
   "logOut": "Log out",
   "addTodoList": "Add Todo List",
+  "deleteList": "Delete list",
+  "deleteListMessage": "Are you sure you want to permanently delete the list {listName}? All tasks included in the list will also be deleted.",
   "@_____________________TODOS_PAGE_____________________": {},
   "addTodo": "Add Todo",
   "@_____________________EDIT_LIST_PAGE_____________________": {},
