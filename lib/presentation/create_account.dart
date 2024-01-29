@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
 import 'package:todo_table/l10n/l10n.dart';
-import 'package:todo_table/presentation/components/error_handler.dart';
 
 final appState = StateModule.appState();
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class CreateAccount extends StatefulWidget {
+  const CreateAccount({super.key});
+
   @override
-  createState() => _LoginPageState();
+  State<CreateAccount> createState() => _CreateAccountState();
 }
-class _LoginPageState extends State<LoginPage>{
+
+class _CreateAccountState extends State<CreateAccount> {
 
   String _username = '';
   String _password = '';
@@ -35,6 +36,9 @@ class _LoginPageState extends State<LoginPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: appState.goToLogin,
+        ),
         title: Text(L10n.of(context).appTitle),
       ),
       body: Observer(
@@ -45,8 +49,8 @@ class _LoginPageState extends State<LoginPage>{
             );
           }
           return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Spacer(flex: 2,),
               TextField(
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
@@ -71,33 +75,12 @@ class _LoginPageState extends State<LoginPage>{
                 ),
               ),
               ElevatedButton(
-                onPressed: () => appState.login(_username, _password, 
-                  onFail: () => ErrorHandler.showError(context)
-                ), 
-                child: Text(L10n.of(context).logIn),
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Text(
-                  style:const TextStyle(fontSize: 20),
-                  L10n.of(context).noAccountQuestion,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () => appState.goToCreateAccount(),
+                onPressed: () => print('Create an account'), 
                 child: Text(L10n.of(context).createAnAccount),
               ),
-              const Spacer(flex: 2,),
             ],
           );
         }
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => print('Change language'),
-        tooltip: 'Language',
-        child: const Icon(Icons.language),
       ),
     );
   }

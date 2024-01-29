@@ -35,7 +35,7 @@ class _ListEditPage extends State<ListEditPage> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: () => appState.goToLists(),
+          onPressed: appState.goToLists,
         ),
         title: Text(L10n.of(context).newTodoList),
       ),

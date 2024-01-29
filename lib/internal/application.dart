@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_table/businessLogic/state/app_state.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
 import 'package:todo_table/l10n/l10n.dart';
+import 'package:todo_table/presentation/create_account.dart';
 import 'package:todo_table/presentation/list_edit_page.dart';
 import 'package:todo_table/presentation/login_page.dart';
 import 'package:todo_table/presentation/todo_edit_page.dart';
@@ -38,6 +39,7 @@ class Application extends StatelessWidget {
                 child: Observer(
                   builder: (_) => switch (appState.currentPage) {
                     AppPage.login => const LoginPage(),
+                    AppPage.createAccount => const CreateAccount(),
                     AppPage.todoLists => const TodoListsPage(),
                     AppPage.todos => const TodosPage(),
                     AppPage.listEdit => const ListEditPage(),

@@ -167,6 +167,28 @@ mixin _$AppState on _AppState, Store {
       ActionController(name: '_AppState', context: context);
 
   @override
+  void goToLogin() {
+    final _$actionInfo =
+        _$_AppStateActionController.startAction(name: '_AppState.goToLogin');
+    try {
+      return super.goToLogin();
+    } finally {
+      _$_AppStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void goToCreateAccount() {
+    final _$actionInfo = _$_AppStateActionController.startAction(
+        name: '_AppState.goToCreateAccount');
+    try {
+      return super.goToCreateAccount();
+    } finally {
+      _$_AppStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void goToLists() {
     final _$actionInfo =
         _$_AppStateActionController.startAction(name: '_AppState.goToLists');

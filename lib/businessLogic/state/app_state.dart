@@ -8,6 +8,7 @@ part 'app_state.g.dart';
 
 enum AppPage{
   login,
+  createAccount,
   todoLists,
   todos,
   listEdit,
@@ -131,6 +132,16 @@ abstract class _AppState with Store {
     todoLists = await _repository.getTodoLists(owner: userName); // update lists after delete
 
     isLoading = false;
+  }
+
+  @action
+  void goToLogin () {
+    currentPage = AppPage.login;
+  }
+
+  @action
+  void goToCreateAccount () {
+    currentPage = AppPage.createAccount;
   }
 
   @action
