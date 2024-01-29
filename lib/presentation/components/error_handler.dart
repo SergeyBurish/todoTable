@@ -15,6 +15,18 @@ class ErrorHandler {
       case AppError.authFail:
         errorTitle = L10n.of(context).authorisationError;
         errorMessage = L10n.of(context).authorisationMessage;
+      case AppError.getListsFail:
+        errorTitle = L10n.of(context).error;
+        errorMessage = L10n.of(context).failedLoadLists;
+      case AppError.getTodosFail:
+        errorTitle = L10n.of(context).error;
+        errorMessage = L10n.of(context).failedLoadTodos;
+      case AppError.saveListFail:
+        errorTitle = L10n.of(context).error;
+        errorMessage = L10n.of(context).failedSaveList;
+      case AppError.deleteListFail:
+        errorTitle = L10n.of(context).error;
+        errorMessage = L10n.of(context).faileDeleteList;
       default:
         errorTitle = '';
         errorMessage = 'Unknown error';

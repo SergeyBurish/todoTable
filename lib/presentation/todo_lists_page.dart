@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
 import 'package:todo_table/l10n/l10n.dart';
+import 'package:todo_table/presentation/components/error_handler.dart';
 
 final appState = StateModule.appState();
 
@@ -15,7 +16,7 @@ class _TodoListsPageState extends State<TodoListsPage>{
 
   @override
   void initState() {
-    appState.getLists();
+    appState.getLists(onFail: ()=>ErrorHandler.showError(context));
     super.initState();
   }
 
@@ -81,7 +82,7 @@ class _TodoListsPageState extends State<TodoListsPage>{
                       itemBuilder: (BuildContext context, int index) {
                         final todoList = appState.todoLists.elementAt(index);
                         return InkWell(
-                          onTap: () => appState.getTodos(todoList.name),
+                          onTap: () => appState.goToTodos(todoList.name),
                           child: Container(
                             color: (index % 2 == 0) ? Colors.black12 : Colors.white,
                             child: Row(

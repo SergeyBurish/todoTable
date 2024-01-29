@@ -18,6 +18,10 @@ enum AppError{
   noError,
   connectionFail,
   authFail,
+  getListsFail,
+  getTodosFail,
+  saveListFail,
+  deleteListFail,
 }
 
 // This is the class used by rest of your codebase
@@ -76,30 +80,45 @@ abstract class _AppState with Store {
   }
 
   @action
-  Future<void> getLists() async {
+  Future<void> getLists({Function? onFail}) async {
     isLoading = true;
-    todoLists = await _repository.getTodoLists(owner: userName);
+
+    try {
+      todoLists = await _repository.getTodoLists(owner: userName);
+    } on Exception {
+      currentError = AppError.getListsFail;
+      if (onFail != null) {onFail();}
+    }
+    
     isLoading = false;
   }
 
   @action
-  Future<void> getTodos(String listName) async {
+  Future<void> getTodos({Function? onFail}) async {
     isLoading = true;
 
-    todos = await _repository.getTodos(owner: userName, list: listName);
-    currentList = listName;
-    currentPage = AppPage.todos;
+    try {
+      todos = await _repository.getTodos(owner: userName, list: currentList);
+    } on Exception {
+      currentError = AppError.getTodosFail;
+      if (onFail != null) {onFail();}
+    }
 
     isLoading = false;
   }
 
   @action
-  Future<void> saveList (String listName, String description, bool private) async {
+  Future<void> saveList (String listName, String description, bool private, {Function? onFail}) async {
     isLoading = true;
 
-    await _repository.saveTodoList(
-      owner: userName, name: listName, description: description, private: private);
-    currentPage = AppPage.todoLists;
+    try {
+      await _repository.saveTodoList(
+        owner: userName, name: listName, description: description, private: private);
+      currentPage = AppPage.todoLists;
+    } on Exception {
+      currentError = AppError.saveListFail;
+      if (onFail != null) {onFail();}
+    }
 
     isLoading = false;
   }
@@ -120,7 +139,8 @@ abstract class _AppState with Store {
   }
 
   @action
-  void goToTodos () {
+  void goToTodos (String listName) {
+    currentList = listName;
     currentPage = AppPage.todos;
   }
 

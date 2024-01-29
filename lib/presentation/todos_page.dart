@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
 import 'package:todo_table/l10n/l10n.dart';
+import 'package:todo_table/presentation/components/error_handler.dart';
 
 final appState = StateModule.appState();
 
@@ -15,7 +16,7 @@ class _TodosPageState extends State<TodosPage>{
 
   @override
   void initState() {
-    print('TodosPage init');
+    appState.getTodos(onFail: ()=>ErrorHandler.showError(context));
     super.initState();
   }
 

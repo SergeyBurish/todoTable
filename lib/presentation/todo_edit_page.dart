@@ -16,7 +16,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: () => appState.goToTodos(),
+          onPressed: () => appState.goToTodos(appState.currentList),
         ),
         title: const Text("TodoEditPage"),
       ),

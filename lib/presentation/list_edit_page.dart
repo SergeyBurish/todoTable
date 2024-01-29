@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
 import 'package:todo_table/l10n/l10n.dart';
+import 'package:todo_table/presentation/components/error_handler.dart';
 
 final appState = StateModule.appState();
 
@@ -66,7 +67,8 @@ class _ListEditPage extends State<ListEditPage> {
           ),
           const SizedBox(height: 20,),
           ElevatedButton(
-            onPressed: () => appState.saveList(_name, _description, _private), 
+            onPressed: () => appState.saveList(_name, _description, _private, 
+                onFail: () => ErrorHandler.showError(context)), 
             child: Text(L10n.of(context).save),
           ),
         ],
