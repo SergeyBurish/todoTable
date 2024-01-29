@@ -106,14 +106,14 @@ class _TodoListsPageState extends State<TodoListsPage>{
                                       actions: <Widget>[
                                         TextButton(
                                           onPressed: () => Navigator.pop(context, 'Cancel'),
-                                          child: const Text('Cancel'),
+                                          child: Text(L10n.of(context).cancel),
                                         ),
                                         TextButton(
                                           onPressed: () {
                                             Navigator.pop(context, 'OK');
                                             appState.deleteList(todoList.name);
                                           },
-                                          child: const Text('OK'),
+                                          child: Text(L10n.of(context).delete),
                                         ),
                                       ],
                                     ),

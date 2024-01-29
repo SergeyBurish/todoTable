@@ -7,11 +7,17 @@ import 'package:todo_table/businessLogic/repository/repository.dart';
 part 'app_state.g.dart';
 
 enum AppPage{
-    login,
-    todoLists,
-    todos,
-    listEdit,
-    todoEdit,
+  login,
+  todoLists,
+  todos,
+  listEdit,
+  todoEdit,
+}
+
+enum AppError{
+  noError,
+  connectionFail,
+  authFail,
 }
 
 // This is the class used by rest of your codebase
@@ -30,7 +36,7 @@ abstract class _AppState with Store {
   AppPage currentPage = AppPage.login;
 
   @observable
-  bool logInFail = false;
+  AppError currentError = AppError.noError;
 
   @observable
   String userName = '';
@@ -45,15 +51,26 @@ abstract class _AppState with Store {
   String currentList = '';
 
   @action
-  Future<void> login(String name, String password) async {
+  Future<void> login(String name, String password, {Function? onFail}) async {
     isLoading = true;
 
-    final users = await _repository.getUser(name: name, password: password);
-    if (users.isNotEmpty) {
-      userName = users.first.name;
+    try {
+      final users = await _repository.getUser(name: name, password: password);
+      if (users.isNotEmpty) {
+        userName = users.first.name;
+        currentError = AppError.noError;
+        currentPage = AppPage.todoLists;
+      } else {
+        currentError = AppError.authFail;
+        currentPage = AppPage.login;
+        if (onFail != null) {onFail();}
+      }
+      currentPage = users.isEmpty ? AppPage.login : AppPage.todoLists;
+    } on Exception {
+      currentError = AppError.connectionFail;
+      currentPage = AppPage.login;
+      if (onFail != null) {onFail();}
     }
-    currentPage = users.isEmpty ? AppPage.login : AppPage.todoLists;
-    logInFail = users.isEmpty;
 
     isLoading = false;
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
 import 'package:todo_table/l10n/l10n.dart';
+import 'package:todo_table/presentation/components/error_handler.dart';
 
 final appState = StateModule.appState();
 
@@ -57,7 +58,9 @@ class _LoginPageState extends State<LoginPage>{
                 ),
               ),
               ElevatedButton(
-                onPressed: () => appState.login(_username, _password), 
+                onPressed: () => appState.login(_username, _password, 
+                  onFail: () => ErrorHandler.showError(context)
+                ), 
                 child: Text(L10n.of(context).logIn),
               ),
               const Spacer(),

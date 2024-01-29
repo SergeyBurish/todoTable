@@ -41,19 +41,19 @@ mixin _$AppState on _AppState, Store {
     });
   }
 
-  late final _$logInFailAtom =
-      Atom(name: '_AppState.logInFail', context: context);
+  late final _$currentErrorAtom =
+      Atom(name: '_AppState.currentError', context: context);
 
   @override
-  bool get logInFail {
-    _$logInFailAtom.reportRead();
-    return super.logInFail;
+  AppError get currentError {
+    _$currentErrorAtom.reportRead();
+    return super.currentError;
   }
 
   @override
-  set logInFail(bool value) {
-    _$logInFailAtom.reportWrite(value, super.logInFail, () {
-      super.logInFail = value;
+  set currentError(AppError value) {
+    _$currentErrorAtom.reportWrite(value, super.currentError, () {
+      super.currentError = value;
     });
   }
 
@@ -124,8 +124,9 @@ mixin _$AppState on _AppState, Store {
       AsyncAction('_AppState.login', context: context);
 
   @override
-  Future<void> login(String name, String password) {
-    return _$loginAsyncAction.run(() => super.login(name, password));
+  Future<void> login(String name, String password, {Function? onFail}) {
+    return _$loginAsyncAction
+        .run(() => super.login(name, password, onFail: onFail));
   }
 
   late final _$getListsAsyncAction =
@@ -224,7 +225,7 @@ mixin _$AppState on _AppState, Store {
     return '''
 isLoading: ${isLoading},
 currentPage: ${currentPage},
-logInFail: ${logInFail},
+currentError: ${currentError},
 userName: ${userName},
 todoLists: ${todoLists},
 todos: ${todos},
