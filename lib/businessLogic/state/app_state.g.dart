@@ -146,14 +146,6 @@ mixin _$AppState on _AppState, Store {
     return _$getListsAsyncAction.run(() => super.getLists(onFail: onFail));
   }
 
-  late final _$getTodosAsyncAction =
-      AsyncAction('_AppState.getTodos', context: context);
-
-  @override
-  Future<void> getTodos({Function? onFail}) {
-    return _$getTodosAsyncAction.run(() => super.getTodos(onFail: onFail));
-  }
-
   late final _$saveListAsyncAction =
       AsyncAction('_AppState.saveList', context: context);
 
@@ -170,6 +162,24 @@ mixin _$AppState on _AppState, Store {
   @override
   Future<void> deleteList(String listName) {
     return _$deleteListAsyncAction.run(() => super.deleteList(listName));
+  }
+
+  late final _$getTodosAsyncAction =
+      AsyncAction('_AppState.getTodos', context: context);
+
+  @override
+  Future<void> getTodos({Function? onFail}) {
+    return _$getTodosAsyncAction.run(() => super.getTodos(onFail: onFail));
+  }
+
+  late final _$saveTodoAsyncAction =
+      AsyncAction('_AppState.saveTodo', context: context);
+
+  @override
+  Future<void> saveTodo(String todoName, String description, bool important,
+      {Function? onFail}) {
+    return _$saveTodoAsyncAction.run(
+        () => super.saveTodo(todoName, description, important, onFail: onFail));
   }
 
   late final _$_AppStateActionController =

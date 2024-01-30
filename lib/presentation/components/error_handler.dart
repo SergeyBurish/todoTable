@@ -33,6 +33,9 @@ class ErrorHandler {
       case AppError.deleteListFail:
         errorTitle = L10n.of(context).error;
         errorMessage = L10n.of(context).faileDeleteList;
+      case AppError.saveTodoFail:
+        errorTitle = L10n.of(context).error;
+        errorMessage = L10n.of(context).failedSaveTodo;
       default:
         errorTitle = '';
         errorMessage = 'Unknown error';

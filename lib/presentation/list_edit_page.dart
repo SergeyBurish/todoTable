@@ -18,8 +18,13 @@ class _ListEditPage extends State<ListEditPage> {
   String _description = '';
   bool _private = false;
 
+  bool _nameValid = false;
+
   _changeName(String text){
-    setState(() => _name = text);
+    setState(() {
+      _name = text;
+      _nameValid = text.isNotEmpty;
+    });
   }
 
   _changeDescription(String text){
@@ -28,6 +33,11 @@ class _ListEditPage extends State<ListEditPage> {
 
   _changePrivate(bool? val){
     setState(() => _private = val ?? false);
+  }
+
+  _saveList (context) {
+    appState.saveList(_name, _description, _private, 
+      onFail: () => ErrorHandler.showError(context));
   }
 
   @override
@@ -47,6 +57,7 @@ class _ListEditPage extends State<ListEditPage> {
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               hintText: L10n.of(context).listName,
+              errorText: _nameValid ? null : L10n.of(context).noEmpty,
             ),
             onChanged: _changeName,
           ),
@@ -67,8 +78,7 @@ class _ListEditPage extends State<ListEditPage> {
           ),
           const SizedBox(height: 20,),
           ElevatedButton(
-            onPressed: () => appState.saveList(_name, _description, _private, 
-                onFail: () => ErrorHandler.showError(context)), 
+            onPressed: _nameValid ? () => _saveList(context) : null, 
             child: Text(L10n.of(context).save),
           ),
         ],

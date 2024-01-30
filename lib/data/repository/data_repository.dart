@@ -26,11 +26,6 @@ class DataRepository extends Repository {
   }
 
   @override
-  Future<List<Todo>> getTodos({required String owner, required String list}) {
-    return _apiUtil.getTodos(owner: owner, list: list);
-  }
-
-  @override
   Future<void> saveTodoList({
       required String owner,
       required String name, 
@@ -44,5 +39,20 @@ class DataRepository extends Repository {
       required String owner,
       required String name}) {
     return _apiUtil.deleteTodoList(owner: owner, name: name);
+  }
+
+  @override
+  Future<List<Todo>> getTodos({required String owner, required String list}) {
+    return _apiUtil.getTodos(owner: owner, list: list);
+  }
+
+  @override
+  Future<void> saveTodo({
+      required String owner,
+      required String name,
+      required String list,
+      required String description,
+      required bool important}) {
+    return _apiUtil.saveTodo(owner: owner, name: name, list: list, description: description, important: important);
   }
 }

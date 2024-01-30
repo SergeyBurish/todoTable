@@ -26,6 +26,7 @@ enum AppError{
   getTodosFail,
   saveListFail,
   deleteListFail,
+  saveTodoFail,
 }
 
 // This is the class used by rest of your codebase
@@ -120,20 +121,6 @@ abstract class _AppState with Store {
   }
 
   @action
-  Future<void> getTodos({Function? onFail}) async {
-    isLoading = true;
-
-    try {
-      todos = await _repository.getTodos(owner: userName, list: currentList);
-    } on Exception {
-      currentError = AppError.getTodosFail;
-      if (onFail != null) {onFail();}
-    }
-
-    isLoading = false;
-  }
-
-  @action
   Future<void> saveList (String listName, String description, bool private, {Function? onFail}) async {
     isLoading = true;
 
@@ -155,6 +142,36 @@ abstract class _AppState with Store {
 
     await _repository.deleteTodoList(owner: userName, name: listName);
     todoLists = await _repository.getTodoLists(owner: userName); // update lists after delete
+
+    isLoading = false;
+  }
+
+  @action
+  Future<void> getTodos({Function? onFail}) async {
+    isLoading = true;
+
+    try {
+      todos = await _repository.getTodos(owner: userName, list: currentList);
+    } on Exception {
+      currentError = AppError.getTodosFail;
+      if (onFail != null) {onFail();}
+    }
+
+    isLoading = false;
+  }
+
+  @action
+  Future<void> saveTodo (String todoName, String description, bool important, {Function? onFail}) async {
+    isLoading = true;
+
+    try {
+      await _repository.saveTodo(
+        owner: userName, name: todoName, list: currentList, description: description, important: important);
+      currentPage = AppPage.todos;
+    } on Exception {
+      currentError = AppError.saveTodoFail;
+      if (onFail != null) {onFail();}
+    }
 
     isLoading = false;
   }

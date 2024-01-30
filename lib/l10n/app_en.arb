@@ -16,6 +16,7 @@
   "failedLoadTodos": "Failed to load todos of the list.",
   "failedSaveList": "Failed to save list.",
   "faileDeleteList": "Failed to delete list.",
+  "failedSaveTodo": "Failed to save todo.",
   "@_____________________LOGIN_CREATE_ACCOUNT_PAGE_____________________": {},
   "username": "Username",
   "password": "Password",
@@ -36,5 +37,11 @@
   "newTodoList": "New Todo List",
   "listName": "List Name",
   "listDescription": "List Description",
-  "private": "Private"
+  "private": "Private",
+  "noEmpty": "Shouldn't be empty",
+  "@_____________________EDIT_TODO_PAGE_____________________": {},
+  "newTodo": "New Todo",
+  "todoName": "Todo Name",
+  "todoDescription": "Todo Description",
+  "important": "Important"
 }

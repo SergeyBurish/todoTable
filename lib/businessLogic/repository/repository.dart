@@ -18,10 +18,6 @@ abstract class Repository {
     required String owner,
   });
 
-  Future<List<Todo>> getTodos({
-    required String owner, 
-    required String list});
-
   Future<void> saveTodoList({
     required String owner,
     required String name, 
@@ -31,4 +27,15 @@ abstract class Repository {
   Future<void> deleteTodoList({
     required String owner,
     required String name});
+
+  Future<List<Todo>> getTodos({
+    required String owner,
+    required String list});
+
+  Future<void> saveTodo({
+      required String owner,
+      required String name,
+      required String list,
+      required String description,
+      required bool important});
 }

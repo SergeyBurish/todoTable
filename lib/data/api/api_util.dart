@@ -2,6 +2,7 @@
 import 'package:todo_table/businessLogic/model/todo.dart';
 import 'package:todo_table/businessLogic/model/todo_list.dart';
 import 'package:todo_table/businessLogic/model/user.dart';
+import 'package:todo_table/data/api/request/change_todo_request.dart';
 import 'package:todo_table/data/api/request/get_todo_lists_request.dart';
 import 'package:todo_table/data/api/request/get_todos_request.dart';
 import 'package:todo_table/data/api/request/user_request.dart';
@@ -41,15 +42,6 @@ class ApiUtil {
     return TodoListsMapper.fromDto(result);
   }
 
-  Future<List<Todo>> getTodos({
-    required String owner,
-    required String list,
-  }) async {
-    final request = GetTodosRequest(owner: owner, list: list);
-    final result = await _supabaseService.getTodos(request);
-    return TodosMapper.fromDto(result);
-  }
-
   Future<void> saveTodoList({
     required String owner,
     required String name, 
@@ -68,5 +60,26 @@ class ApiUtil {
       final request = ChangeTodoListRequest(
         owner: owner, name: name);
       return await _supabaseService.deleteTodoList(request);
+  }
+
+  Future<List<Todo>> getTodos({
+    required String owner,
+    required String list,
+  }) async {
+    final request = GetTodosRequest(owner: owner, list: list);
+    final result = await _supabaseService.getTodos(request);
+    return TodosMapper.fromDto(result);
+  }
+
+  Future<void> saveTodo({
+    required String owner,
+    required String name,
+    required String list,
+    required String description, 
+    required bool important,
+  }) async {
+      final request = ChangeTodoRequest(
+        owner: owner, name: name, list: list, description: description, important: important);
+      return await _supabaseService.saveTodo(request);
   }
 }
