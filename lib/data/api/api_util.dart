@@ -4,7 +4,7 @@ import 'package:todo_table/businessLogic/model/todo_list.dart';
 import 'package:todo_table/businessLogic/model/user.dart';
 import 'package:todo_table/data/api/request/get_todo_lists_request.dart';
 import 'package:todo_table/data/api/request/get_todos_request.dart';
-import 'package:todo_table/data/api/request/get_user_request.dart';
+import 'package:todo_table/data/api/request/user_request.dart';
 import 'package:todo_table/data/api/request/change_todo_list_request.dart';
 import 'package:todo_table/data/api/service/supabase_service.dart';
 import 'package:todo_table/data/mapper/todo_lists_mapper.dart';

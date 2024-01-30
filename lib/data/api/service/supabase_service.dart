@@ -4,7 +4,7 @@ import 'package:todo_table/data/api/dto/todo_list_dto.dart';
 import 'package:todo_table/data/api/dto/user_dto.dart';
 import 'package:todo_table/data/api/request/get_todo_lists_request.dart';
 import 'package:todo_table/data/api/request/get_todos_request.dart';
-import 'package:todo_table/data/api/request/get_user_request.dart';
+import 'package:todo_table/data/api/request/user_request.dart';
 import 'package:todo_table/data/api/request/change_todo_list_request.dart';
 
 class SupabaseService {
@@ -51,22 +51,18 @@ class SupabaseService {
   }
 
   Future<void> saveTodoList(ChangeTodoListRequest request) async {
-    final response = await _dio.post(
+    await _dio.post(
       '/todoList',
       data: request.data(),
       options: Options( headers: {"apikey": _apikey, "Content-Type": "application/json"}, )
     );
-
-    print('saveTodoList response statusCode ${response.statusCode}');
   }
 
   Future<void> deleteTodoList(ChangeTodoListRequest request) async {
-    final response = await _dio.delete(
+    await _dio.delete(
       '/todoList',
       queryParameters: request.parameters(),
       options: Options( headers: {"apikey": _apikey, "Content-Type": "application/json"}, )
     );
-
-    print('deleteTodoList response statusCode ${response.statusCode}');
   }
 }
