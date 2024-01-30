@@ -129,6 +129,15 @@ mixin _$AppState on _AppState, Store {
         .run(() => super.login(name, password, onFail: onFail));
   }
 
+  late final _$createAccountAsyncAction =
+      AsyncAction('_AppState.createAccount', context: context);
+
+  @override
+  Future<void> createAccount(String name, String password, {Function? onFail}) {
+    return _$createAccountAsyncAction
+        .run(() => super.createAccount(name, password, onFail: onFail));
+  }
+
   late final _$getListsAsyncAction =
       AsyncAction('_AppState.getLists', context: context);
 

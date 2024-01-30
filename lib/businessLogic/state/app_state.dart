@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:todo_table/businessLogic/model/todo.dart';
 import 'package:todo_table/businessLogic/model/todo_list.dart';
@@ -19,6 +20,8 @@ enum AppError{
   noError,
   connectionFail,
   authFail,
+  createAccountFail,
+  createAccountNameExists,
   getListsFail,
   getTodosFail,
   saveListFail,
@@ -63,17 +66,39 @@ abstract class _AppState with Store {
       final users = await _repository.getUser(name: name, password: password);
       if (users.isNotEmpty) {
         userName = users.first.name;
-        currentError = AppError.noError;
         currentPage = AppPage.todoLists;
       } else {
         currentError = AppError.authFail;
         currentPage = AppPage.login;
         if (onFail != null) {onFail();}
       }
-      currentPage = users.isEmpty ? AppPage.login : AppPage.todoLists;
     } on Exception {
       currentError = AppError.connectionFail;
       currentPage = AppPage.login;
+      if (onFail != null) {onFail();}
+    }
+
+    isLoading = false;
+  }
+
+  @action
+  Future<void> createAccount (String name, String password, {Function? onFail}) async {
+    isLoading = true;
+
+    try {
+      await _repository.saveUser(name: name, password: password);
+      userName = name;
+      currentPage = AppPage.todoLists;
+    } on Exception catch(e) {
+      currentError = AppError.createAccountFail;
+
+      if (e is DioException) {
+        if (e.response?.statusCode == 409) {
+          currentError = AppError.createAccountNameExists;
+        }
+      }
+
+      currentPage = AppPage.createAccount;
       if (onFail != null) {onFail();}
     }
 

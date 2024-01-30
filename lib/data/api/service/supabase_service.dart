@@ -15,13 +15,21 @@ class SupabaseService {
     BaseOptions(baseUrl: _BASE_URL),
   );
 
-  Future<UsersDto> getUser(GetUserRequest request) async {
+  Future<UsersDto> getUser(UserRequest request) async {
     final response = await _dio.get(
       '/user',
       queryParameters: request.parameters(),
       options: Options( headers: {'apikey': _apikey}, )
     );
     return UsersDto.fromApi(response.data);
+  }
+
+  Future<void> saveUser(UserRequest request) async {
+    await _dio.post(
+      '/user',
+      data: request.data(),
+      options: Options( headers: {"apikey": _apikey, "Content-Type": "application/json"}, )
+    );
   }
 
   Future<TodoListsDto> getTodoLists(GetTodoListsRequest request) async {

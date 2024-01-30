@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
 import 'package:todo_table/l10n/l10n.dart';
+import 'package:todo_table/presentation/components/error_handler.dart';
 
 final appState = StateModule.appState();
 
@@ -17,12 +18,21 @@ class _CreateAccountState extends State<CreateAccount> {
   String _username = '';
   String _password = '';
 
+  bool _nameValid = false;
+  bool _pwdValid = false;
+
   _changeName(String text){
-    setState(() => _username = text);
+    setState(() {
+      _username = text;
+      _nameValid = text.length > 2;
+    });
   }
 
   _changePwd(String text){
-    setState(() => _password = text);
+    setState(() {
+      _password = text;
+      _pwdValid = text.length > 3;
+    });
   }
 
   bool _hidePassword = true;
@@ -32,8 +42,14 @@ class _CreateAccountState extends State<CreateAccount> {
     });
   }
 
+  _createAccount (context) {
+    appState.createAccount(_username, _password, 
+      onFail: () => ErrorHandler.showError(context));
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
@@ -55,6 +71,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
                   hintText: L10n.of(context).username,
+                  errorText: _nameValid ? null : L10n.of(context).atLeast3,
                 ),
                 onChanged: _changeName,
               ),
@@ -65,6 +82,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     hintText: L10n.of(context).password,
+                    errorText: _pwdValid ? null : L10n.of(context).atLeast4,
                     suffixIcon: GestureDetector(
                       onTap: _togglePwdVisibility,
                       child: Icon(
@@ -75,7 +93,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () => print('Create an account'), 
+                onPressed: (_nameValid && _pwdValid) ? () => _createAccount(context) : null,
                 child: Text(L10n.of(context).createAnAccount),
               ),
             ],

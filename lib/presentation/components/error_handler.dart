@@ -15,6 +15,12 @@ class ErrorHandler {
       case AppError.authFail:
         errorTitle = L10n.of(context).authorisationError;
         errorMessage = L10n.of(context).authorisationMessage;
+      case AppError.createAccountFail:
+        errorTitle = L10n.of(context).error;
+        errorMessage = L10n.of(context).failedCreateAccount;
+      case AppError.createAccountNameExists:
+        errorTitle = L10n.of(context).usernameExists;
+        errorMessage = L10n.of(context).usernameExistsMessage;
       case AppError.getListsFail:
         errorTitle = L10n.of(context).error;
         errorMessage = L10n.of(context).failedLoadLists;

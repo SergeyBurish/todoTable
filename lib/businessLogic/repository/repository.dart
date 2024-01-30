@@ -9,6 +9,11 @@ abstract class Repository {
     required String password,
   });
 
+  Future<void> saveUser({
+    required String name, 
+    required String password,
+  });
+
   Future<List<TodoList>> getTodoLists({
     required String owner,
   });

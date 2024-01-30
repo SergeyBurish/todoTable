@@ -16,6 +16,11 @@ class DataRepository extends Repository {
   }
 
   @override
+  Future<void> saveUser({required String name, required String password,}) {
+    return _apiUtil.saveUser(name: name, password: password);
+  }
+
+  @override
   Future<List<TodoList>> getTodoLists({required String owner}) {
     return _apiUtil.getTodoLists(owner: owner);
   }

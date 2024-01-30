@@ -20,9 +20,17 @@ class ApiUtil {
     required String name,
     required String password,
   }) async {
-    final request = GetUserRequest(name: name, password: password);
+    final request = UserRequest(name: name, password: password);
     final result = await _supabaseService.getUser(request);
     return UserMapper.fromDto(result);
+  }
+
+  Future<void> saveUser({
+    required String name,
+    required String password,
+  }) async {
+      final request = UserRequest(name: name, password: password);
+      return await _supabaseService.saveUser(request);
   }
 
   Future<List<TodoList>> getTodoLists({
@@ -46,7 +54,8 @@ class ApiUtil {
     required String owner,
     required String name, 
     required String description, 
-    required bool private}) async {
+    required bool private
+  }) async {
       final request = ChangeTodoListRequest(
         owner: owner, name: name, description: description, private: private);
       return await _supabaseService.saveTodoList(request);
@@ -54,7 +63,8 @@ class ApiUtil {
 
   Future<void> deleteTodoList({
     required String owner,
-    required String name}) async {
+    required String name
+  }) async {
       final request = ChangeTodoListRequest(
         owner: owner, name: name);
       return await _supabaseService.deleteTodoList(request);
