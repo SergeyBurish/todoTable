@@ -8,6 +8,7 @@ class TodosMapper {
     for(var todoDto in todosDto.todos) {
       todos.add(Todo(
         name: todoDto.name,
+        description: todoDto.description,
         important: todoDto.important,
         completed: todoDto.completed, ));
     }

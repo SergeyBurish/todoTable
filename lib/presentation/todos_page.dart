@@ -6,6 +6,9 @@ import 'package:todo_table/presentation/components/error_handler.dart';
 
 final appState = StateModule.appState();
 
+const NAME_FLEX = 1;
+const DESCR_FLEX = 3;
+
 class TodosPage extends StatefulWidget {
   const TodosPage({super.key});
   @override
@@ -27,7 +30,7 @@ class _TodosPageState extends State<TodosPage>{
         leading: BackButton(
           onPressed: appState.goToLists,
         ),
-        title: Text('Todos; List selected: ${appState.currentList}'),
+        title: Text(L10n.of(context).todos),
       ),
       body: Observer(builder: (_) {
         if (appState.isLoading) {
@@ -35,15 +38,77 @@ class _TodosPageState extends State<TodosPage>{
             child: CircularProgressIndicator(),
           );
         }
-        return ListView.builder(
-          itemCount: appState.todos.length,
-          itemBuilder: (BuildContext context, int index) {
-            final todo = appState.todos.elementAt(index);
-            return ListTile(
-              title: Text('todo ${todo.name}'),
-              onTap: () => print('tap on Todo ${todo.name}'),
-            );
-          },
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: DecoratedBox(
+            decoration: const BoxDecoration(boxShadow: [BoxShadow(blurRadius: 7, color: Colors.grey)]),
+            child: Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      // Text(L10n.of(context).important),
+                      Expanded(child: Row(
+                        children: [
+                          Expanded(
+                            flex: NAME_FLEX,
+                            child: Center(child: Text(L10n.of(context).name))),
+                          Expanded(
+                            flex: DESCR_FLEX,
+                            child: Center(child: Text(L10n.of(context).description)))
+                        ],
+                      )),
+                      Text(L10n.of(context).important),
+                      Opacity(
+                        opacity: 0, // hide icon but keep space
+                        child: IconButton(icon: const Icon(Icons.delete), onPressed: (){},))
+                    ],
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: appState.todos.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final todo = appState.todos.elementAt(index);
+                        return InkWell(
+                          onTap: () => print('mark todo completed'),
+                          child: Container(
+                            color: (index % 2 == 0) ? Colors.black12 : Colors.white,
+                            child: Row(
+                              children: [
+                                Expanded(child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: NAME_FLEX,
+                                      child: Center(child: Text(todo.name))),
+                                    Expanded(
+                                      flex: DESCR_FLEX,
+                                      child: Center(child: Text(todo.description ?? ''))),
+                                  ],
+                                )),
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 0, // hide text but keep width
+                                      child: Text(L10n.of(context).important)
+                                    ),
+                                    todo.important ? const Icon(Icons.check) : const Icon(Icons.remove),
+                                  ],
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () => print('delete todo'))
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         );}
       ),
       floatingActionButton: FloatingActionButton(

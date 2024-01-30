@@ -9,5 +9,6 @@ class Todo {
     required this.name,
     required this.important,
     required this.completed,
+    this.description
   });
 }

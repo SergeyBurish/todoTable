@@ -69,8 +69,8 @@ class _TodoListsPageState extends State<TodoListsPage>{
                 children: [
                   Row(
                     children: [
-                      const Expanded(child: Center(child: Text('Name'))),
-                      const Text('private'),
+                      Expanded(child: Center(child: Text(L10n.of(context).name))),
+                      Text(L10n.of(context).private),
                       Opacity(
                         opacity: 0, // hide icon but keep space
                         child: IconButton(icon: const Icon(Icons.delete), onPressed: (){},))
@@ -90,11 +90,11 @@ class _TodoListsPageState extends State<TodoListsPage>{
                                 Expanded(child: Center(child: Text(todoList.name))),
                                 Column(
                                   children: [
-                                    const SizedBox(
+                                    SizedBox(
                                       height: 0, // hide text but keep width
-                                      child: Text('private')
+                                      child: Text(L10n.of(context).private)
                                     ),
-                                    todoList.private ? const Icon(Icons.check_box) : const Icon(Icons.check_box_outline_blank),
+                                    todoList.private ? const Icon(Icons.check) : const Icon(Icons.remove),
                                   ],
                                 ),
                                 IconButton(
