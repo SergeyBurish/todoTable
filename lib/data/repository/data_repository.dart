@@ -55,4 +55,12 @@ class DataRepository extends Repository {
       required bool important}) {
     return _apiUtil.saveTodo(owner: owner, name: name, list: list, description: description, important: important);
   }
+
+  @override
+  Future<void> deleteTodo({
+      required String owner,
+      required String name,
+      required String list,}) {
+    return _apiUtil.deleteTodo(owner: owner, name: name, list: list);
+  }
 }

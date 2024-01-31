@@ -27,6 +27,7 @@ enum AppError{
   saveListFail,
   deleteListFail,
   saveTodoFail,
+  deleteTodoFail
 }
 
 // This is the class used by rest of your codebase
@@ -170,6 +171,23 @@ abstract class _AppState with Store {
       currentPage = AppPage.todos;
     } on Exception {
       currentError = AppError.saveTodoFail;
+      if (onFail != null) {onFail();}
+    }
+
+    isLoading = false;
+  }
+
+  @action
+  Future<void> deleteTodo (String todoName, {Function? onFail}) async {
+    isLoading = true;
+
+    try {
+      await _repository.deleteTodo(
+        owner: userName, name: todoName, list: currentList);
+      todos = await _repository.getTodos(owner: userName, list: currentList); // update todos after delete
+      currentPage = AppPage.todos;
+    } on Exception {
+      currentError = AppError.deleteTodoFail;
       if (onFail != null) {onFail();}
     }
 

@@ -74,4 +74,12 @@ class SupabaseService {
       options: Options( headers: {"apikey": _apikey, "Content-Type": "application/json"}, )
     );
   }
+
+  Future<void> deleteTodo(ChangeTodoRequest request) async {
+    await _dio.delete(
+      '/todo',
+      queryParameters: request.parameters(),
+      options: Options( headers: {"apikey": _apikey, "Content-Type": "application/json"}, )
+    );
+  }
 }

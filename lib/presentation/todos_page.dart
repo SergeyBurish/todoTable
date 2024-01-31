@@ -97,7 +97,27 @@ class _TodosPageState extends State<TodosPage>{
                                 ),
                                 IconButton(
                                   icon: Icon(Icons.delete),
-                                  onPressed: () => print('delete todo'))
+                                  onPressed: () => showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) => AlertDialog(
+                                      title: Text(L10n.of(context).deleteTodo),
+                                      content: Text(L10n.of(context).deleteTodoMessage(todo.name)),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                                          child: Text(L10n.of(context).cancel),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context, 'OK');
+                                            appState.deleteTodo(todo.name);
+                                          },
+                                          child: Text(L10n.of(context).delete),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
                           ),

@@ -182,6 +182,15 @@ mixin _$AppState on _AppState, Store {
         () => super.saveTodo(todoName, description, important, onFail: onFail));
   }
 
+  late final _$deleteTodoAsyncAction =
+      AsyncAction('_AppState.deleteTodo', context: context);
+
+  @override
+  Future<void> deleteTodo(String todoName, {Function? onFail}) {
+    return _$deleteTodoAsyncAction
+        .run(() => super.deleteTodo(todoName, onFail: onFail));
+  }
+
   late final _$_AppStateActionController =
       ActionController(name: '_AppState', context: context);
 

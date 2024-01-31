@@ -82,4 +82,14 @@ class ApiUtil {
         owner: owner, name: name, list: list, description: description, important: important);
       return await _supabaseService.saveTodo(request);
   }
+
+  Future<void> deleteTodo({
+    required String owner,
+    required String name,
+    required String list,
+  }) async {
+      final request = ChangeTodoRequest(
+        owner: owner, name: name, list: list);
+      return await _supabaseService.deleteTodo(request);
+  }
 }

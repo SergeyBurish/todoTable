@@ -15,9 +15,9 @@ class ChangeTodoRequest {
     this.completed = false,
   });
 
-  // Map<String, dynamic> parameters() {
-  //   return {'owner': 'eq.$owner', 'name': 'eq.$name',};
-  // }
+  Map<String, dynamic> parameters() {
+    return {'owner': 'eq.$owner', 'name': 'eq.$name', 'list': 'eq.$list'};
+  }
 
   Map<String, String> data() {
     return {
