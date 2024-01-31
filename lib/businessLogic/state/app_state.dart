@@ -40,6 +40,9 @@ abstract class _AppState with Store {
   final Repository _repository;
 
   @observable
+  String appVersion = '1.0.0';
+
+  @observable
   bool isLoading = false;
 
     @observable

@@ -1,8 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_table/internal/dependencies/state_module.dart';
 import 'package:todo_table/l10n/l10n.dart';
 import 'package:todo_table/presentation/components/error_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final appState = StateModule.appState();
 
@@ -95,9 +97,44 @@ class _LoginPageState extends State<LoginPage>{
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: FloatingActionButton(
-        onPressed: () => print('Change language'),
-        tooltip: 'Language',
-        child: const Icon(Icons.language),
+        onPressed: () => showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: Text(L10n.of(context).about),
+            content: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: L10n.of(context).aboutPart1(appState.appVersion),
+                    style: const TextStyle(color: Colors.black),),
+                  TextSpan(
+                    text: 'Flutter',
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => launch('https://flutter.dev/')),
+                  TextSpan(
+                    text: L10n.of(context).aboutPart2,
+                    style: const TextStyle(color: Colors.black),),
+                  TextSpan(
+                    text: L10n.of(context).aboutPart3,
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => launch('https://hh.ru/resume/4ea606e8ff0b350b400039ed1f6133734b3242?hhtmFrom=resume_list')),
+                ]
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context, 'OK');
+                },
+                child: Text(L10n.of(context).ok),
+              ),
+            ],
+          ),
+        ),
+        tooltip: L10n.of(context).about,
+        child: const Icon(Icons.info),
       ),
     );
   }
